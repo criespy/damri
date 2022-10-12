@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,49 +9,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
 </head>
 <body>
+{% block content %}
  <div class="container px-5 my-5">
     <form id="contactForm" data-sb-form-api-token="API_TOKEN">
         <div class="mb-3">
             <label class="form-label" for="nama">Nama</label>
-            <input class="form-control" id="nama" type="text" placeholder="Nama" data-sb-validations="" />
+            <input class="form-control" id="nama" type="text" placeholder="{{ object.nama }}" data-sb-validations="" />
         </div>
         <div class="mb-3">
             <label class="form-label" for="pool">Pool</label>
-            <input class="form-control" id="pool" type="text" placeholder="Pool" data-sb-validations="" />
+            <input class="form-control" id="pool" type="text" placeholder="{{ object.pool }}" data-sb-validations="" />
         </div>
         <div class="mb-3">
             <label class="form-label" for="bus">Bus</label>
-            <input class="form-control" id="bus" type="text" placeholder="Bus" data-sb-validations="" />
+            <input class="form-control" id="bus" type="text" placeholder="{{ object.bus }}" data-sb-validations="" />
         </div>
         <div class="mb-3">
             <label class="form-label" for="tanggalPeriksaTerkahir">Tanggal Periksa Terkahir</label>
-            <input class="form-control" id="tanggalPeriksaTerkahir" type="text" placeholder="Tanggal Periksa Terkahir" data-sb-validations="" />
+            <input class="form-control" id="tanggalPeriksaTerkahir" type="text" placeholder="{{ object.periksa_terakhir }}" data-sb-validations="" />
         </div>
         <div class="mb-3">
             <label class="form-label" for="status">Status</label>
-            <input class="form-control" id="status" type="text" placeholder="Status" data-sb-validations="" />
-        </div>
-        <div class="mb-3">
+            <input class="form-control" id="status" type="text" placeholder="{{ object.status }}" data-sb-validations="" />
+        <div class="mb-3 text-center">
             <label class="form-label" for="qrCode">QR Code</label>
-            <input class="form-control" id="qrCode" type="text" placeholder="QR Code" data-sb-validations="required" />
-            <div class="invalid-feedback" data-sb-feedback="qrCode:required">QR Code is required.</div>
-        </div>
-        <div class="d-none" id="submitSuccessMessage">
-            <div class="text-center mb-3">
-                <div class="fw-bolder">Form submission successful!</div>
-                <p>To activate this form, sign up at</p>
-                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-            </div>
-        </div>
-        <div class="d-none" id="submitErrorMessage">
-            <div class="text-center text-danger mb-3">Error sending message!</div>
-        </div>
-        <div class="d-grid">
-            <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button>
+            <img class="" src="{% static '' %}{{ object.qrcode_path }}" />
         </div>
     </form>
  </div>
-<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-
+{% endblock %}
 </body>
 </html>
