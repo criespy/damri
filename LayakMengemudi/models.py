@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
 from datetime import datetime
 
 class Pengemudi(models.Model):
@@ -20,6 +21,9 @@ class Pengemudi(models.Model):
 
     def __str__(self):
         return self.nama
+
+    def get_absolute_url(self):
+        return reverse('pengemudi-list')
 
 class Pemeriksaan(models.Model):
     pengemudi = models.ForeignKey(Pengemudi, on_delete=models.CASCADE)

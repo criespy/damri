@@ -19,6 +19,7 @@
             <tr>
                 <td>No</td>
                 <td>Nama</td>
+                <td>Foto</td>
                 <td>Nik</td>
                 <td>Pool</td>
                 <td>Bus</td>
@@ -30,10 +31,11 @@
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ pengemudi.nama }}</td>
+                    <td><img src="{% static '' %}{{ pengemudi.pasfoto_path}}" width="50"></td>
                     <td>{{ pengemudi.nik }}</td>
                     <td>{{ pengemudi.pool }}</td>
                     <td>{{ pengemudi.bus }}</td>
-                    <td><a type="button" href="#" class="btn btn-secondary">edit</a></td>
+                    <td><a type="button" href="{% url 'pengemudi-update' %}{{ pengemudi.id }}" class="btn btn-secondary">edit</a></td>
                 </tr>
             {% endfor %}
         </tbody>

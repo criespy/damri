@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import DetailView, CreateView, TemplateView, ListView
+from django.views.generic import DetailView, CreateView, TemplateView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Pemeriksaan, Pengemudi
 from .forms import FormPengemudiCreate
@@ -15,6 +15,12 @@ class PengemudiCreate(LoginRequiredMixin, CreateView):
     model = Pengemudi
     template_name = 'pengemudi_createview.html'
     form_class = FormPengemudiCreate
+
+class PengemudiUpdate(LoginRequiredMixin, UpdateView):
+    model = Pengemudi
+    template_name = 'pengemudi_updateview.html'
+    form_class = FormPengemudiCreate
+
 class PengemudiList(LoginRequiredMixin, ListView):
     model = Pengemudi
     template_name = 'pengemudi_listview.html'
