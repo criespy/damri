@@ -11,6 +11,7 @@ class Pengemudi(models.Model):
         TIDAK = 'TL', _('Tidak Layak Jalan')
     status = models.CharField(max_length=2, choices=StatusJalan.choices, default=StatusJalan.TIDAK)
     periksa_terakhir = models.DateTimeField(null=True)
+    pasfoto_path = models.CharField(max_length=256, default="none")
     qrcode_path = models.CharField(max_length=256, default="none")
 
     def __str__(self):

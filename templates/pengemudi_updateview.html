@@ -15,7 +15,7 @@
     <form id="contactForm" data-sb-form-api-token="API_TOKEN">
         <div class="card">
             <div class="card-header mb-3">
-                <img src="{% static '' %}logo-company-small.png" class="card-img-top">
+                <img src="{% static '' %}logo-damri.png" class="card-img-top">
             </div>
             <div class="card-body">
                 <div class="text-center">
@@ -23,26 +23,26 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="nama">Nama</label>
-                    <input class="form-control" id="nama" type="text" value="{{ object.nama }}" data-sb-validations="" disabled />
+                    <input class="form-control" id="nama" type="text" placeholder="{{ object.nama }}" data-sb-validations="" />
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="pool">Pool</label>
-                    <input class="form-control" id="pool" type="text" value="{{ object.pool }}" data-sb-validations="" disabled />
+                    <input class="form-control" id="pool" type="text" placeholder="{{ object.pool }}" data-sb-validations="" />
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="bus">Bus</label>
-                    <input class="form-control" id="bus" type="text" value="{{ object.bus }}" data-sb-validations="" disabled />
+                    <input class="form-control" id="bus" type="text" placeholder="{{ object.bus }}" data-sb-validations="" />
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="tanggalPeriksaTerakhir">Tanggal Periksa Terakhir</label>
-                    <input class="form-control" id="tanggalPeriksaTerakhir" type="text" value="{{ object.periksa_terakhir }}" data-sb-validations="" disabled />
+                    <input class="form-control" id="tanggalPeriksaTerakhir" type="text" placeholder="{{ object.periksa_terakhir }}" data-sb-validations="" />
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="status">Status</label>
-                    <input class="form-control" id="status" type="text" placeholder="{{ object.get_status_display }}" data-sb-validations="" disabled style="" />
+                    <input class="form-control" id="status" type="text" placeholder="{{ object.status }}" data-sb-validations="" />
                 <div class="mb-3 text-center">
                     <label class="form-label" for="qrCode">QR Code</label>
-                    <img class="form-label" src="{% static '' %}{{ object.qrcode_path }}" width="80" />
+                    <img class="" src="{% static '' %}{{ object.qrcode_path }}" width="80" />
                 </div>
             </div>         
         </div>
@@ -50,18 +50,5 @@
     </form>
  </div>
 {% endblock %}
-<script type="text/javascript">
-    function highlight() {
-        var status = document.getElementById("status").placeholder;
-        
-        if (status == "Layak Jalan"){
-            document.getElementById("status").style.backgroundColor = "rgb(151, 255, 151)"
-        }
-        else {
-            document.getElementById("status").style.backgroundColor =  "tomato"
-        }
-    }
-    highlight();
-</script>
 </body>
 </html>
