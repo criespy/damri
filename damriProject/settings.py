@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-
     'LayakMengemudi',
+    'myauth',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
