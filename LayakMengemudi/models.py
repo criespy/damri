@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Pengemudi(models.Model):
     nama = models.CharField(max_length=100)
+    nik = models.CharField(max_length=12)
     pool = models.CharField(max_length=50)
     bus = models.CharField(max_length=6)
     class StatusJalan(models.TextChoices):

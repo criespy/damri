@@ -20,6 +20,6 @@ from LayakMengemudi.views import Beranda
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('myauth.urls')),
-    path('', Beranda.as_view(), name='beranda'),
-    path('scan', include('LayakMengemudi.urls')),
+    #path('', Beranda.as_view(), name='beranda'),
+    path('', include('LayakMengemudi.urls')),
 ]

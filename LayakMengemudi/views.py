@@ -10,9 +10,13 @@ class Beranda(LoginRequiredMixin, TemplateView):
     login_url = 'auth/login'
     template_name = 'beranda.html'
 
+class PengemudiCreate(CreateView):
+    model = Pengemudi
+    template_name = 'pengemudi_createview.html'
+
 class PengemudiDetail(DetailView):
     model = Pengemudi
-    template_name = 'pengemudi_detail.html'
+    template_name = 'pengemudi_detailview.html'
 
 class PemeriksaanCreate(CreateView):
     model = Pemeriksaan
