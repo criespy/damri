@@ -1,0 +1,56 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <meta content='maximum-scale=1.0, initial-scale=1.0, width=device-width' name='viewport'>
+
+    <title>Sistem Pemeriksaan Kesehatan</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top shadow" style="background-color: #D3D3D3;" >
+      <div class="container">
+        <img src="{% static '/logo-company-small.png' %}" href="#"></img>
+        <div class="navbar-nav ms-auto" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Master Data
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="{% url 'pengemudi-create' %}">Input Data Pengemudi</a></li>
+                <li><a class="dropdown-item" href="{% url 'pengemudi-list' %}">List Pengemudi</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false">Pemeriksaan</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Input Pemeriksaan Kesehatan</a></li>
+                <li><a class="dropdown-item" href="#">History Pemeriksaan</a></li>
+              </ul>
+            </li>
+          </ul>
+          <span class="navbar-text">
+            <a class="navbar-text" style="text-decoration:none;" href="#">user login: {{ user.username }}</a> |
+            <a class="navbar-text bg-danger text-light"  href="{% url 'logout' %}">Logout</a>
+          </span>
+        </div>
+
+      </div>
+    </nav>
+    {% block content %}
+    {% endblock content %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </body>
+</html>
