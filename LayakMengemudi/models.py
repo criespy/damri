@@ -1,8 +1,12 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from datetime import datetime
 
 class Pengemudi(models.Model):
     nama = models.CharField(max_length=100)
+    tanggal_lahir = models.DateField(default=datetime.utcnow().date())
+    kota_kelahiran = models.CharField(max_length=50, default="none", null=False)
+    alamat = models.TextField(default="none", null=False)
     nik = models.CharField(max_length=12)
     pool = models.CharField(max_length=50)
     bus = models.CharField(max_length=6)
