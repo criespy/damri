@@ -10,4 +10,4 @@ class CustomLogoutView(LogoutView):
     def logout_view(selfrequest):
         logout(request)
     template_name = 'myauth/login.html'
-    next_page = 'login'
+    next_page = 'beranda'

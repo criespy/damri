@@ -32,4 +32,3 @@ class PengemudiDetail(LoginRequiredMixin,DetailView):
 class PemeriksaanCreate(LoginRequiredMixin, CreateView):
     model = Pemeriksaan
     template_name = 'pemeriksaan_create.html'
-    
