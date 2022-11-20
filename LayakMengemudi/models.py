@@ -32,6 +32,16 @@ class Pemeriksaan(models.Model):
     suhu = models.FloatField()
     jam_tidur = models.FloatField()
     kondisi = models.CharField(max_length=200)
+    class StatusJalan(models.TextChoices):
+        LAYAK = 'L', _('Layak Jalan')
+        TIDAK = 'TL', _('Tidak Layak Jalan')
+    status = models.CharField(max_length=2, choices=StatusJalan.choices, default=StatusJalan.TIDAK)
 
     def __str__(self):
         return self.tanggal + " - " + self.pengemudi
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        orang = Pengemudi.objects.get(id=self.pengemudi.id)
+        orang.status = self.status
+        orang.save(update_fields=['status'])

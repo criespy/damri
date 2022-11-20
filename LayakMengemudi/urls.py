@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PengemudiCreate, PengemudiList, PengemudiDetail, PengemudiUpdate, Beranda
+from .views import *
 from . import views
 
 urlpatterns = [
@@ -9,4 +9,6 @@ urlpatterns = [
     path('pengemudi/update/', PengemudiUpdate.as_view(), name='pengemudi-update'),
     path('pengemudi/list', PengemudiList.as_view(), name='pengemudi-list'),
     path('pengemudi/<int:pk>/', PengemudiDetail.as_view(), name='pengemudi-detail'),
+    path('pemeriksaan/create/', PemeriksaanCreate.as_view(), name='pemeriksaan-create'),
+    path('pemeriksaan/create/<int:pk>', PemeriksaanCreate.as_view(), name='pemeriksaan-create'),
     ]

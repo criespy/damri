@@ -1,7 +1,17 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, fields, widgets, formset_factory
+from django.forms.models import inlineformset_factory
 from LayakMengemudi.models import *
 from datetime import date
+
+FormSetUpdatePengemudi = inlineformset_factory(Pengemudi, Pemeriksaan, fields=('__all__'), extra=1, can_delete=False, widgets={
+        'pengemudi': forms.TextInput({'class':'form-control form-select'}),
+        'tanggal' : forms.TextInput({'class':'form-control datepicker','autocomplete':'off', 'value':datetime.now().strftime("%Y-%m-%d %H:%M:%S")}),
+        'tensi' : forms.TextInput({'class':'form-control','placeholder':'120/80'}),
+        'suhu' : forms.TextInput({'class':'form-control', 'placeholder':'36.1'}),
+        'jam_tidur' : forms.TextInput({'class':'form-control', 'placeholder':'8'}),
+        'kondisi' : forms.Textarea({'class':'form-control'})
+        })
 
 class FormPengemudiCreate(ModelForm):
     class Meta:
@@ -20,5 +30,17 @@ class FormPengemudiCreate(ModelForm):
             'bus': forms.TextInput({'class':'form-control'}),
             'pasfoto_path': forms.TextInput({'class':'form-control'}),
             'qrcode_path': forms.TextInput({'class':'form-control', 'type':'hidden'}),
+        }
 
+class FormPemeriksaanCreate(ModelForm):
+    class Meta:
+        model = Pengemudi
+        fields = ['nama', 'status', 'periksa_terakhir']
+        labels = {'suhu':'Suhu (°C)', 'jam_tidur':'Jumlah Jam Tidur', 'tensi':'Tensi (mmHg)'}
+        icons = {'tensi':'fa fa-user'}
+
+        widgets = {
+            'nama': forms.TextInput({'class':'form-control'}),
+            'status': forms.Select({'class':'form-control form-select'}),
+            'periksa_terakhir': forms.TextInput({'class':'form-control', 'hidden':'true' }),
         }

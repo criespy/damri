@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import DetailView, CreateView, TemplateView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Pemeriksaan, Pengemudi
-from .forms import FormPengemudiCreate
+from .forms import FormPengemudiCreate, FormPemeriksaanCreate, FormSetUpdatePengemudi
 
 def index(request):
     return render(request, 'home.html')
@@ -31,4 +31,29 @@ class PengemudiDetail(LoginRequiredMixin,DetailView):
 
 class PemeriksaanCreate(LoginRequiredMixin, CreateView):
     model = Pemeriksaan
-    template_name = 'pemeriksaan_create.html'
+    template_name = 'pemeriksaan_createview2.html'
+
+class PemeriksaanUpdate(LoginRequiredMixin, UpdateView):
+    model = Pengemudi
+    template_name = 'pemeriksaan_createview.html'
+    form_class = FormPemeriksaanCreate
+
+    def get_queryset(self):
+        id = self.kwargs['pk']
+        return Pengemudi.objects.filter(pk=id)
+
+    def get_context_data(self, **kwargs):
+        detail = super(PemeriksaanCreate, self).get_context_data(**kwargs)
+        if self.request.POST:
+            detail['form'] = FormPemeriksaanCreate(self.request.POST, instance=self.object)
+            detail['konteks'] = FormSetUpdatePengemudi(
+                self.request.POST, instance=self.object)
+        else:
+            detail['form'] = FormPemeriksaanCreate(instance=self.object)
+            detail['konteks'] = FormSetUpdatePengemudi(instance=self.object)
+
+        return detail
+
+class PemeriksaanList(LoginRequiredMixin, ListView):
+    model = Pemeriksaan
+    template_name = 'pemeriksaan_listview'
