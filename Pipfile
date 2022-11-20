@@ -8,6 +8,7 @@ django = "*"
 gunicorn = "*"
 whitenoise = "*"
 django-widget-tweaks = "*"
+django-sslserver = "*"
 
 [dev-packages]
 

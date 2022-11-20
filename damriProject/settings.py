@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'LayakMengemudi',
     'myauth',
     'widget_tweaks',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
