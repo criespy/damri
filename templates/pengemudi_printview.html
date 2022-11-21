@@ -14,8 +14,8 @@
  <div class="container-fluid">
     <form id="contactForm" data-sb-form-api-token="API_TOKEN">
         <div class="card">
-            <div class="card-header mb-3">
-                <img src="{% static '' %}logo-company-small.png" class="card-img-top">
+            <div class="card-header mb-3 text-center">
+                <img src="{% static '' %}bus-logo-small.png" width="150" >
             </div>
             <div class="card-body">
                 <div class="text-center">
@@ -32,14 +32,6 @@
                 <div class="mb-3">
                     <label class="form-label" for="bus">Bus</label>
                     <input class="form-control" id="bus" type="text" value="{{ object.bus }}" data-sb-validations="" disabled />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="tanggalPeriksaTerakhir">Tanggal Periksa Terakhir</label>
-                    <input class="form-control" id="tanggalPeriksaTerakhir" type="text" value="{{ object.periksa_terakhir }}" data-sb-validations="" disabled />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="status">Status</label>
-                    <input class="form-control" id="status" type="text" placeholder="{{ object.get_status_display }}" data-sb-validations="" disabled style="" />
                 </div>
                 <div class="mb-3 text-center">
                     <label class="form-label" for="qrCode">QR Code</label>

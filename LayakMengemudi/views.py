@@ -76,3 +76,7 @@ class PemeriksaanUpdate(LoginRequiredMixin, UpdateView):
 class PemeriksaanList(LoginRequiredMixin, ListView):
     model = Pemeriksaan
     template_name = 'pemeriksaan_listview'
+
+class PrintIDCard(LoginRequiredMixin, DetailView):
+    model = Pengemudi
+    template_name = 'pengemudi_printview.html'
