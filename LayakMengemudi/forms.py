@@ -13,6 +13,13 @@ FormSetUpdatePengemudi = inlineformset_factory(Pengemudi, Pemeriksaan, fields=('
         'kondisi' : forms.Textarea({'class':'form-control'})
         })
 
+FormPemeriksaanTerakhir = inlineformset_factory(Pengemudi, Pemeriksaan, fields=(['tensi', 'suhu', 'jam_tidur', 'kondisi']), extra=1, can_delete=False, widgets={
+        'tensi' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
+        'suhu' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
+        'jam_tidur' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
+        'kondisi' : forms.Textarea({'class':'form-control', 'disabled':'disabled'})
+        })
+
 class FormPengemudiCreate(ModelForm):
     class Meta:
         model = Pengemudi

@@ -41,45 +41,15 @@
                     <label class="form-label" for="status">Status</label>
                     <input class="form-control" id="status" type="text" placeholder="{{ object.get_status_display }}" data-sb-validations="" disabled style="" />
                 </div>
-                <div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Detail Pemeriksaan Terakhir</button>
+                <div class="mb-3 text-center">
+                    <label class="form-label" for="qrCode">QR Code</label>
+                    <img class="form-label" src="{% static '' %}{{ object.qrcode_path }}" width="80" />
                 </div>
-            </div>         
+            </div>
         </div>
+        
     </form>
  </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Pemeriksaan Terakhir</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-            <div class="mb-3">
-                {{ konteks.management_form }}
-                {% for form in konteks.forms %}
-                {% if forloop.first %}
-                    <div class="mb3">
-                        {% for field in form.visible_fields %}
-                        <label class="form-label">{{ field.label|capfirst }}</label>
-                        {{ field.errors.as_ul }}
-                        {{ field }}
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                {% endfor %}
-            </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 {% endblock %}
 <script type="text/javascript">
     function highlight() {
