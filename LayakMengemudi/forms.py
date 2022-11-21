@@ -32,15 +32,30 @@ class FormPengemudiCreate(ModelForm):
             'qrcode_path': forms.TextInput({'class':'form-control', 'type':'hidden'}),
         }
 
+#class FormPemeriksaanCreate(ModelForm):
+#    class Meta:
+#        model = Pengemudi
+#        fields = ['nama', 'status', 'periksa_terakhir']
+#        labels = {'suhu':'Suhu (°C)', 'jam_tidur':'Jumlah Jam Tidur', 'tensi':'Tensi (mmHg)'}
+#        icons = {'tensi':'fa fa-user'}
+#
+#        widgets = {
+#            'nama': forms.TextInput({'class':'form-control'}),
+#            'status': forms.Select({'class':'form-control form-select'}),
+#            'periksa_terakhir': forms.TextInput({'class':'form-control', 'hidden':'true' }),
+#        }
+
 class FormPemeriksaanCreate(ModelForm):
     class Meta:
-        model = Pengemudi
-        fields = ['nama', 'status', 'periksa_terakhir']
-        labels = {'suhu':'Suhu (°C)', 'jam_tidur':'Jumlah Jam Tidur', 'tensi':'Tensi (mmHg)'}
-        icons = {'tensi':'fa fa-user'}
-
+        model = Pemeriksaan
+        fields = '__all__'
         widgets = {
-            'nama': forms.TextInput({'class':'form-control'}),
-            'status': forms.Select({'class':'form-control form-select'}),
-            'periksa_terakhir': forms.TextInput({'class':'form-control', 'hidden':'true' }),
+            'pengemudi': forms.Select({'class': 'form-control form-select'}),
+            'tanggal': forms.TextInput({'class': 'form-control datepicker', 'autocomplete': 'off',
+                                        'value': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}),
+            'tensi': forms.TextInput({'class': 'form-control', 'placeholder': '120/80'}),
+            'suhu': forms.TextInput({'class': 'form-control', 'placeholder': '36.1'}),
+            'jam_tidur': forms.TextInput({'class': 'form-control', 'placeholder': '8'}),
+            'kondisi': forms.Textarea({'class': 'form-control'}),
+            'status': forms.Select({'class': 'form-control form-select'}),
         }

@@ -38,10 +38,19 @@ class Pemeriksaan(models.Model):
     status = models.CharField(max_length=2, choices=StatusJalan.choices, default=StatusJalan.TIDAK)
 
     def __str__(self):
-        return self.tanggal + " - " + self.pengemudi
+        return str(self.tanggal) + " - " + self.pengemudi.nama
+
+    def get_absolute_url(self):
+        return reverse('pengemudi-list')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        orang = Pengemudi.objects.get(id=self.pengemudi.id)
-        orang.status = self.status
-        orang.save(update_fields=['status'])
+        self.pengemudi.status = self.status
+        self.pengemudi.periksa_terakhir = self.tanggal
+        self.pengemudi.save()
+
+    #def save(self, *args, **kwargs):
+    #    super().save(*args, **kwargs)
+    #    orang = Pengemudi.objects.get(id=self.pengemudi.id)
+    #    orang.status = self.status
+    #    orang.save(update_fields=['status'])

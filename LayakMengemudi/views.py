@@ -32,6 +32,7 @@ class PengemudiDetail(LoginRequiredMixin,DetailView):
 class PemeriksaanCreate(LoginRequiredMixin, CreateView):
     model = Pemeriksaan
     template_name = 'pemeriksaan_createview2.html'
+    form_class = FormPemeriksaanCreate
 
 class PemeriksaanUpdate(LoginRequiredMixin, UpdateView):
     model = Pengemudi
