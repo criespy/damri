@@ -61,7 +61,7 @@ class FormPemeriksaanCreate(ModelForm):
             'tanggal': forms.TextInput({'class': 'form-control datepicker', 'autocomplete': 'off',
                                         'value': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}),
             'tensi': forms.TextInput({'class': 'form-control', 'placeholder': '120/80'}),
-            'suhu': forms.TextInput({'class': 'form-control', 'placeholder': '36.1'}),
+            'suhu': forms.TextInput({'class': 'form-control', 'placeholder': '36.1', 'pattern':'\d'}),
             'jam_tidur': forms.TextInput({'class': 'form-control', 'placeholder': '8'}),
             'kondisi': forms.Textarea({'class': 'form-control'}),
             'status': forms.Select({'class': 'form-control form-select'}),
