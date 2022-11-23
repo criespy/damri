@@ -36,7 +36,8 @@ class FormPengemudiCreate(ModelForm):
             'pool' : forms.TextInput({'class':'form-control'}),
             'bus': forms.TextInput({'class':'form-control'}),
             'pasfoto_path': forms.TextInput({'class':'form-control'}),
-            'qrcode_path': forms.TextInput({'class':'form-control', 'type':'hidden'}),
+            'pasfoto': forms.FileInput({'class':'form-control'}),
+            'qrcode_path': forms.TextInput({'class':'form-control'}),
         }
 
 #class FormPemeriksaanCreate(ModelForm):

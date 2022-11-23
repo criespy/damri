@@ -81,3 +81,4 @@ class PemeriksaanList(LoginRequiredMixin, ListView):
 class PrintIDCard(LoginRequiredMixin, DetailView):
     model = Pengemudi
     template_name = 'pengemudi_printview.html'
+    slug_field = 'nik'

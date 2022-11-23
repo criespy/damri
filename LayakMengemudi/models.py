@@ -5,10 +5,10 @@ from datetime import datetime
 
 class Pengemudi(models.Model):
     nama = models.CharField(max_length=100)
-    tanggal_lahir = models.DateField(default=datetime.utcnow().date())
-    kota_kelahiran = models.CharField(max_length=50, default="none", null=False)
-    alamat = models.TextField(default="none", null=False)
-    nik = models.CharField(max_length=12)
+    tanggal_lahir = models.DateField(null=False, blank=False)#default=datetime.utcnow().date())
+    kota_kelahiran = models.CharField(max_length=50, null=False, blank=False)
+    alamat = models.TextField(null=False, blank=False)
+    nik = models.CharField(max_length=12, null=False, blank=False)
     pool = models.CharField(max_length=50)
     bus = models.CharField(max_length=6)
     class StatusJalan(models.TextChoices):
@@ -16,8 +16,8 @@ class Pengemudi(models.Model):
         TIDAK = 'TL', _('Tidak Layak Jalan')
     status = models.CharField(max_length=2, choices=StatusJalan.choices, default=StatusJalan.TIDAK)
     periksa_terakhir = models.DateTimeField(null=True)
-    pasfoto_path = models.CharField(max_length=256, default="none")
-    qrcode_path = models.CharField(max_length=256, default="none")
+    pasfoto = models.ImageField(upload_to='images/')
+    qrcode_path = models.CharField(max_length=256)
 
     def __str__(self):
         return self.nama

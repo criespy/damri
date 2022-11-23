@@ -16,7 +16,8 @@
     <script src="{% static 'js/html5-qrcode.min.js' %}"></script>
     <script>
       function onScanSuccess(decodedText, decodedResult) {
-          location.replace(decodedText);
+        decodedResult = 'pengemudi/' + decodedText;
+        location.replace(decodedResult);
       }
 
       var html5QrcodeScanner = new Html5QrcodeScanner(

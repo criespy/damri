@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import *
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', Beranda.as_view(), name='beranda'),
@@ -12,5 +14,9 @@ urlpatterns = [
     path('pengemudi/<slug:slug>', PengemudiDetail.as_view(), name='pengemudi-detail'),
     path('pemeriksaan/create/', PemeriksaanCreate.as_view(), name='pemeriksaan-create'),
     path('pemeriksaan/create/<int:pk>', PemeriksaanCreate.as_view(), name='pemeriksaan-create'),
-    path('pengemudi/print_id/<int:pk>', PrintIDCard.as_view(), name='print-id'),
+    path('pengemudi/print_id/<slug:slug>', PrintIDCard.as_view(), name='print-id'),
     ]
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)

@@ -1,12 +1,11 @@
-
-{% extends 'base.html' %}
+{% extends 'navigation.html' %}
 {% load static %}
 {% block content %}
  <div class="container">
     <h1>Input Data Pengemudi</h1>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-        <table class="table">
+        <table class="table table-borderless">
             <thead>
                 <tr>
                     <td colspan="2"></td>
@@ -24,17 +23,14 @@
         </table>
     </form>
  </div>
-<script type="text/javascript">
-    function highlight() {
-        var status = document.getElementById("status").placeholder;
-        
-        if (status == "Layak Jalan"){
-            document.getElementById("status").style.backgroundColor = "rgb(151, 255, 151)"
-        }
-        else {
-            document.getElementById("status").style.backgroundColor =  "tomato"
-        }
-    }
-    highlight();
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+  $( function() {
+    $( "#id_tanggal_lahir" ).datepicker({
+    dateFormat: 'yy-mm-dd',
+    });
+  } );
 </script>
 {% endblock %}

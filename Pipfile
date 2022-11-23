@@ -9,6 +9,7 @@ gunicorn = "*"
 whitenoise = "*"
 django-widget-tweaks = "*"
 django-sslserver = "*"
+pillow = "*"
 
 [dev-packages]
 

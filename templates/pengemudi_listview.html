@@ -2,7 +2,14 @@
 {% load static %}
 {% block content %}
  <div class="container">
-   <h1>Daftar Pengemudi</h1>
+     <div class="row mb-3">
+         <div class="col md-8">
+             <h1>Daftar Pengemudi</h1>
+         </div>
+         <div class="col md-4 text-end">
+             <a href="{% url 'pengemudi-create' %}" type="button" class="btn btn-primary">+Tambah Pengemudi</a>
+         </div>
+     </div>
    <div>
         <table class="table table-striped table-hover">
             <thead>
@@ -20,8 +27,8 @@
                 {% for pengemudi in object_list %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ pengemudi.nama }}</td>
-                        <td><img src="{% static '' %}{{ pengemudi.pasfoto_path}}" width="50"></td>
+                        <td><a href="{% url 'pengemudi-detail' pengemudi.nik %}" style="text-decoration:none" class="link-dark">{{ pengemudi.nama }}</td>
+                        <td><img src="{{ pengemudi.pasfoto.url }}" width="50"></td>
                         <td>{{ pengemudi.nik }}</td>
                         <td>{{ pengemudi.pool }}</td>
                         <td>{{ pengemudi.bus }}</td>

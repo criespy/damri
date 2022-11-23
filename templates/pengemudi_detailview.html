@@ -15,11 +15,12 @@
     <form id="contactForm" data-sb-form-api-token="API_TOKEN">
         <div class="card">
             <div class="card-header mb-3 text-center">
-                <img src="{% static '' %}bus-logo-small.png" width="150" >
+                <img src="{% static '' %}bus-logo-small.png" width="100" >
+                <h2>Company Name</h2>
             </div>
             <div class="card-body">
                 <div class="text-center">
-                    <img src="{% static '' %}{{ object.pasfoto_path }}" />
+                    <img src="{{ object.pasfoto.url }}" />
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="nama">Nama</label>
@@ -41,8 +42,13 @@
                     <label class="form-label" for="status">Status</label>
                     <input class="form-control" id="status" type="text" placeholder="{{ object.get_status_display }}" data-sb-validations="" disabled style="" />
                 </div>
-                <div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Detail Pemeriksaan Terakhir</button>
+                <div class="row mb-2">
+                    <div class="col sm-10">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Detail Pemeriksaan Terakhir</button>
+                    </div>
+                    <div class="col sm-4">
+                        <button type="button" class="btn btn-danger" onclick="window.history.go(-1); return false;">Kembali</button>
+                    </div>
                 </div>
             </div>         
         </div>

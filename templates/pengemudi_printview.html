@@ -16,10 +16,11 @@
         <div class="card">
             <div class="card-header mb-3 text-center">
                 <img src="{% static '' %}bus-logo-small.png" width="150" >
+                <h2>Company Name</h2>
             </div>
             <div class="card-body">
                 <div class="text-center">
-                    <img src="{% static '' %}{{ object.pasfoto_path }}" />
+                    <img src="{{ object.pasfoto.url }}" />
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="nama">Nama</label>
@@ -35,7 +36,7 @@
                 </div>
                 <div class="mb-3 text-center">
                     <label class="form-label" for="qrCode">QR Code</label>
-                    <img class="form-label" src="{% static '' %}{{ object.qrcode_path }}" width="80" />
+                    <img class="form-label" src="{% url 'media' 'qrcodes' object.nik '.png'%}" width="80" />
                 </div>
             </div>
         </div>
