@@ -60,9 +60,9 @@ class FormPemeriksaanCreate(ModelForm):
             'pengemudi': forms.Select({'class': 'form-control form-select'}),
             'tanggal': forms.TextInput({'class': 'form-control datepicker', 'autocomplete': 'off',
                                         'value': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}),
-            'tensi': forms.TextInput({'class': 'form-control', 'placeholder': '120/80'}),
+            'tensi': forms.TextInput({'class': 'form-control', 'placeholder': '120/80', 'pattern':'\d'}),
             'suhu': forms.TextInput({'class': 'form-control', 'placeholder': '36.1', 'pattern':'\d'}),
-            'jam_tidur': forms.TextInput({'class': 'form-control', 'placeholder': '8'}),
+            'jam_tidur': forms.TextInput({'class': 'form-control', 'placeholder': '8', 'pattern':'\d'}),
             'kondisi': forms.Textarea({'class': 'form-control'}),
             'status': forms.Select({'class': 'form-control form-select'}),
         }
