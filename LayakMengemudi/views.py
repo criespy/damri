@@ -29,10 +29,11 @@ class PengemudiList(LoginRequiredMixin, ListView):
 class PengemudiDetail(LoginRequiredMixin,DetailView):
     model = Pengemudi
     template_name = 'pengemudi_detailview.html'
+    slug_field = 'nik'
 
     def get_queryset(self):
-        id = self.kwargs['pk']
-        return Pengemudi.objects.filter(pk=id)
+        id = self.kwargs['slug']
+        return Pengemudi.objects.filter(nik=id)
 
     def get_context_data(self, **kwargs):
         detail = super(PengemudiDetail, self).get_context_data(**kwargs)
