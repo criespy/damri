@@ -33,6 +33,7 @@
                         <td>{{ pengemudi.pool }}</td>
                         <td>{{ pengemudi.bus }}</td>
                         <td><a type="button" href="{% url 'pengemudi-update' %}{{ pengemudi.id }}" class="btn btn-secondary">edit</a></td>
+                        <td><a type="button" href="{% url 'print-id' %}{{ pengemudi.nik }}" class="btn btn-primary">eCard</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

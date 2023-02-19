@@ -18,7 +18,7 @@ class Pengemudi(models.Model):
     status = models.CharField(max_length=2, choices=StatusJalan.choices, default=StatusJalan.TIDAK)
     periksa_terakhir = models.DateTimeField(null=True)
     
-    pasfoto = ResizedImageField(size=[200, 150],upload_to='images/%Y/%Y%m%d.png')
+    pasfoto = ResizedImageField(size=[300, 400],upload_to='images/%Y%m')
     qrcode_path = models.CharField(max_length=256)
 
     def f(instance, filename):

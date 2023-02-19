@@ -14,6 +14,7 @@ urlpatterns = [
     path('pengemudi/<slug:slug>', PengemudiDetail.as_view(), name='pengemudi-detail'),
     path('pemeriksaan/create/', PemeriksaanCreate.as_view(), name='pemeriksaan-create'),
     path('pemeriksaan/create/<int:pk>', PemeriksaanCreate.as_view(), name='pemeriksaan-create'),
+    path('pengemudi/print_id/', PrintIDCard.as_view(), name='print-id'),
     path('pengemudi/print_id/<slug:slug>', PrintIDCard.as_view(), name='print-id'),
     ]
 
