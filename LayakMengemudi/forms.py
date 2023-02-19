@@ -32,12 +32,12 @@ class FormPengemudiCreate(ModelForm):
             'tanggal_lahir': forms.TextInput({'class':'form-control'}),
             'kota_kelahiran': forms.TextInput({'class':'form-control'}),
             'alamat': forms.TextInput({'class':'form-control'}),
-            'nik' : forms.TextInput({'class':'form-control'}),
+            'nik' : forms.TextInput({'class':'form-control', 'id':'nik'}),
             'pool' : forms.TextInput({'class':'form-control'}),
             'bus': forms.TextInput({'class':'form-control'}),
             'pasfoto_path': forms.TextInput({'class':'form-control'}),
             'pasfoto': forms.FileInput({'class':'form-control'}),
-            'qrcode_path': forms.TextInput({'class':'form-control'}),
+            'qrcode_path': forms.TextInput({'class':'form-control', 'id':'qrpath'}),
         }
 
 #class FormPemeriksaanCreate(ModelForm):

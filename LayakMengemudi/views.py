@@ -3,10 +3,11 @@ from django.views.generic import DetailView, CreateView, TemplateView, ListView,
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Pemeriksaan, Pengemudi
 from .forms import FormPengemudiCreate, FormPemeriksaanCreate, FormSetUpdatePengemudi, FormPemeriksaanTerakhir
-from django.utils import timezone
-import datetime
-from django.db.models import Count
+#from django.utils import timezone
+#import datetime
+#from django.db.models import Count
 import qrcode
+from pathlib import os
 
 def index(request):
     return render(request, 'home.html')
@@ -21,12 +22,11 @@ class PengemudiCreate(LoginRequiredMixin, CreateView):
     form_class = FormPengemudiCreate
 
     def form_valid(self, form):
-        qrcode = form.cleaned_data['part_number']
+        qrcode = form.cleaned_data['nik']
         self.valid_submission_callback(qrcode)
-        return super(BuatMasterBarang, self).form_valid(form)
+        return super(PengemudiCreate, self).form_valid(form)
 
     def valid_submission_callback(self, data):
-        # send an email or other backend call back
         input_data = data
         qr = qrcode.QRCode(
             version=1,
@@ -37,7 +37,7 @@ class PengemudiCreate(LoginRequiredMixin, CreateView):
         #img = qr.make_image(fill='black', back_color='white')
         #img.save('.'+static('/images/part_qrcodes/' + data + '.png'))
         img = qr.make_image(fill='black', back_color='white')
-        imgfile = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media/qrcodes' + data + '.png')
+        imgfile = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media/qrcodes/' + data + '.png')
         img.save((imgfile))
 
 class PengemudiUpdate(LoginRequiredMixin, UpdateView):

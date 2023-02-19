@@ -23,6 +23,7 @@
         </table>
     </form>
  </div>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -32,5 +33,15 @@
     dateFormat: 'yy-mm-dd',
     });
   } );
+</script>
+<script>
+    let nik = document.getElementById('nik').value;
+    document.getElementById('nik').onchange = function() {fillQRpath()};
+    console.log('nik = ', nik);
+    function fillQRpath() {
+        nik = document.getElementById('nik').value;
+        console.log('function fillQRpath executed')
+        document.getElementById('qrpath').value = nik + ".png";
+    }
 </script>
 {% endblock %}
