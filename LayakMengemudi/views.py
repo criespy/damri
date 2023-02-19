@@ -17,6 +17,7 @@ class Beranda(LoginRequiredMixin, TemplateView):
     template_name = 'beranda.html'
 
 class PengemudiCreate(LoginRequiredMixin, CreateView):
+    login_url = 'auth/login'
     model = Pengemudi
     template_name = 'pengemudi_createview.html'
     form_class = FormPengemudiCreate
@@ -41,15 +42,18 @@ class PengemudiCreate(LoginRequiredMixin, CreateView):
         img.save((imgfile))
 
 class PengemudiUpdate(LoginRequiredMixin, UpdateView):
+    login_url = 'auth/login'
     model = Pengemudi
     template_name = 'pengemudi_updateview.html'
     form_class = FormPengemudiCreate
 
 class PengemudiList(LoginRequiredMixin, ListView):
+    login_url = 'auth/login'
     model = Pengemudi
     template_name = 'pengemudi_listview.html'
 
 class PengemudiDetail(LoginRequiredMixin,DetailView):
+    login_url = 'auth/login'
     model = Pengemudi
     template_name = 'pengemudi_detailview.html'
     slug_field = 'nik'
@@ -72,11 +76,13 @@ class PengemudiDetail(LoginRequiredMixin,DetailView):
         return detail
 
 class PemeriksaanCreate(LoginRequiredMixin, CreateView):
+    login_url = 'auth/login'
     model = Pemeriksaan
     template_name = 'pemeriksaan_createview2.html'
     form_class = FormPemeriksaanCreate
 
 class PemeriksaanUpdate(LoginRequiredMixin, UpdateView):
+    login_url = 'auth/login'
     model = Pengemudi
     template_name = 'pemeriksaan_createview.html'
     form_class = FormPemeriksaanCreate
@@ -98,10 +104,12 @@ class PemeriksaanUpdate(LoginRequiredMixin, UpdateView):
         return detail
 
 class PemeriksaanList(LoginRequiredMixin, ListView):
+    login_url = 'auth/login'
     model = Pemeriksaan
     template_name = 'pemeriksaan_listview'
 
 class PrintIDCard(LoginRequiredMixin, DetailView):
+    login_url = 'auth/login'
     model = Pengemudi
     template_name = 'pengemudi_printview.html'
     slug_field = 'nik'
