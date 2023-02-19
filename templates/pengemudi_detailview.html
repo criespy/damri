@@ -71,8 +71,8 @@
                     <div class="mb3">
                         {% for field in form.visible_fields %}
                         <label class="form-label">{{ field.label|capfirst }}</label>
-                        {{ field.errors.as_ul }}
-                        {{ field }}
+                            {{ field.errors.as_ul }}
+                            {{ field }}
                         {% endfor %}
                     </div>
                 {% endif %}

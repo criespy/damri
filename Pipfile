@@ -10,6 +10,8 @@ whitenoise = "*"
 django-widget-tweaks = "*"
 django-sslserver = "*"
 pillow = "*"
+django-resized = "*"
+qrcode = "*"
 
 [dev-packages]
 

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from datetime import datetime
+from django_resized import ResizedImageField
 
 class Pengemudi(models.Model):
     nama = models.CharField(max_length=100)
@@ -16,8 +17,16 @@ class Pengemudi(models.Model):
         TIDAK = 'TL', _('Tidak Layak Jalan')
     status = models.CharField(max_length=2, choices=StatusJalan.choices, default=StatusJalan.TIDAK)
     periksa_terakhir = models.DateTimeField(null=True)
-    pasfoto = models.ImageField(upload_to='images/')
+    
+    pasfoto = ResizedImageField(size=[200, 150],upload_to='images/%Y/%Y%m%d.png')
     qrcode_path = models.CharField(max_length=256)
+
+    def f(instance, filename):
+        ext = filename.split('.')[-1]
+        if instance.pk:
+            return '{}.{}'.format(instance.pk, ext)
+        else:
+            pass
 
     def __str__(self):
         return self.nama

@@ -36,7 +36,7 @@
                 </div>
                 <div class="mb-3 text-center">
                     <label class="form-label" for="qrCode">QR Code</label>
-                    <img class="form-label" src="{% url 'media' 'qrcodes' object.nik '.png'%}" width="80" />
+                    <img class="form-label" src="{% get_media_prefix %}/qrcodes/{{ object.nik }}.png" width="80" />
                 </div>
             </div>
         </div>
