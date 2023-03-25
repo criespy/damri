@@ -9,16 +9,19 @@ class Pengemudi(models.Model):
     tanggal_lahir = models.DateField(null=False, blank=False)#default=datetime.utcnow().date())
     kota_kelahiran = models.CharField(max_length=50, null=False, blank=False)
     alamat = models.TextField(null=False, blank=False)
-    nik = models.CharField(max_length=12, null=False, blank=False)
-    pool = models.CharField(max_length=50)
-    bus = models.CharField(max_length=6)
+    nik = models.CharField(max_length=16, null=False, blank=False, unique=True)
+    nomor_hp = models.CharField(max_length=15, null=True, blank=True, unique=True)
+    email = models.EmailField(null=True, blank=True, unique=True)
+    pendidikan_terakhir = models.CharField(max_length=6, null=True, blank=True)
+    pool = models.CharField(max_length=50, null=True, blank=True)
+    bus = models.CharField(max_length=6,null=True, blank=True)
     class StatusJalan(models.TextChoices):
         LAYAK = 'L', _('Layak Jalan')
         TIDAK = 'TL', _('Tidak Layak Jalan')
     status = models.CharField(max_length=2, choices=StatusJalan.choices, default=StatusJalan.TIDAK)
     periksa_terakhir = models.DateTimeField(null=True)
     
-    pasfoto = ResizedImageField(size=[300, 400],upload_to='images/%Y%m')
+    pasfoto = ResizedImageField(size=[300, 400], upload_to='images/%Y%m', default='no_pic.png')
     qrcode_path = models.CharField(max_length=256)
 
     def f(instance, filename):
@@ -40,6 +43,16 @@ class Pemeriksaan(models.Model):
     tensi = models.CharField(max_length=10)
     suhu = models.FloatField()
     jam_tidur = models.FloatField()
+    gula_darah = models.FloatField(null=True, blank=True)
+    kolesterol = models.FloatField(null=True, blank=True)
+    class StatusAlkohol(models.TextChoices):
+        TERDETEKSI = 'A', _('Terdeteksi Alkohol')
+        TIDAK = 'NA', _('Tidak Terdeteksi Alkohol')
+    alkohol = models.CharField(max_length=2, choices=StatusAlkohol.choices, default=StatusAlkohol.TIDAK)
+    class StatusNapza(models.TextChoices):
+        POSITIF = '+', _('Terdekteksi NAPZA')
+        NEGATIF = '-', _('Tidak terdeteksi NAPZA')
+    napza = models.CharField(max_length=1, choices=StatusNapza.choices, default=StatusNapza.NEGATIF)
     kondisi = models.CharField(max_length=200)
     class StatusJalan(models.TextChoices):
         LAYAK = 'L', _('Layak Jalan')

@@ -13,10 +13,13 @@ FormSetUpdatePengemudi = inlineformset_factory(Pengemudi, Pemeriksaan, fields=('
         'kondisi' : forms.Textarea({'class':'form-control'})
         })
 
-FormPemeriksaanTerakhir = inlineformset_factory(Pengemudi, Pemeriksaan, fields=(['tensi', 'suhu', 'jam_tidur', 'kondisi']), extra=1, can_delete=False, widgets={
+FormPemeriksaanTerakhir = inlineformset_factory(Pengemudi, Pemeriksaan, fields=(['tensi', 'suhu', 'jam_tidur', 'gula_darah', 'kolesterol', 'alkohol', 'kondisi']), extra=1, can_delete=False, widgets={
         'tensi' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
         'suhu' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
         'jam_tidur' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
+        'gula_darah': forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
+        'kolesterol': forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
+        'alkohol': forms.Select({'class': 'form-control form-select', 'disabled':'disabled'}),
         'kondisi' : forms.Textarea({'class':'form-control', 'disabled':'disabled'})
         })
 
@@ -25,7 +28,7 @@ class FormPengemudiCreate(ModelForm):
         model = Pengemudi
         fields = '__all__'
         exclude = ['status', 'periksa_terakhir']
-        labels = {'pasfoto_path':'Pas Foto'}
+        labels = {'nomor_hp':'Nomor HP', 'qrcode_path':''}
 
         widgets = {
             'nama': forms.TextInput({'class':'form-control'}),
@@ -33,11 +36,13 @@ class FormPengemudiCreate(ModelForm):
             'kota_kelahiran': forms.TextInput({'class':'form-control'}),
             'alamat': forms.TextInput({'class':'form-control'}),
             'nik' : forms.TextInput({'class':'form-control', 'id':'nik'}),
+            'nomor_hp' : forms.NumberInput({'class':'form-control'}),
+            'email' : forms.EmailInput({'class':'form-control'}),
+            'pendidikan_terakhir' : forms.TextInput({'class':'form-control'}),
             'pool' : forms.TextInput({'class':'form-control'}),
             'bus': forms.TextInput({'class':'form-control'}),
-            'pasfoto_path': forms.TextInput({'class':'form-control'}),
             'pasfoto': forms.FileInput({'class':'form-control'}),
-            'qrcode_path': forms.TextInput({'class':'form-control', 'id':'qrpath'}),
+            'qrcode_path': forms.TextInput({'class':'form-control', 'id':'qrpath', 'hidden':'hidden'}),
         }
 
 #class FormPemeriksaanCreate(ModelForm):
@@ -63,6 +68,9 @@ class FormPemeriksaanCreate(ModelForm):
             'tensi': forms.TextInput({'class': 'form-control', 'placeholder': '120/80'}),
             'suhu': forms.TextInput({'class': 'form-control', 'placeholder': '36.1'}),
             'jam_tidur': forms.TextInput({'class': 'form-control', 'placeholder': '8'}),
+            'gula_darah': forms.TextInput({'class':'form-control'}),
+            'kolesterol': forms.TextInput({'class':'form-control'}),
+            'alkohol': forms.Select({'class': 'form-control form-select'}),
             'kondisi': forms.Textarea({'class': 'form-control'}),
             'status': forms.Select({'class': 'form-control form-select'}),
         }
