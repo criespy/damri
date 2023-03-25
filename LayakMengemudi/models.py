@@ -40,7 +40,9 @@ class Pengemudi(models.Model):
 class Pemeriksaan(models.Model):
     pengemudi = models.ForeignKey(Pengemudi, on_delete=models.CASCADE)
     tanggal = models.DateTimeField()
-    tensi = models.CharField(max_length=10)
+    #tensi = models.CharField(max_length=10)
+    sistolik = models.IntegerField(max_length=3)
+    diastolik = models.IntegerField(max_length=2)
     suhu = models.FloatField()
     jam_tidur = models.FloatField()
     gula_darah = models.FloatField(null=True, blank=True)
@@ -48,7 +50,8 @@ class Pemeriksaan(models.Model):
     class StatusAlkohol(models.TextChoices):
         TERDETEKSI = 'A', _('Terdeteksi Alkohol')
         TIDAK = 'NA', _('Tidak Terdeteksi Alkohol')
-    alkohol = models.CharField(max_length=2, choices=StatusAlkohol.choices, default=StatusAlkohol.TIDAK)
+    #alkohol = models.CharField(max_length=2, choices=StatusAlkohol.choices, default=StatusAlkohol.TIDAK)
+    alkohol = models.FloatField(null=True, blank=True)
     class StatusNapza(models.TextChoices):
         POSITIF = '+', _('Terdekteksi NAPZA')
         NEGATIF = '-', _('Tidak terdeteksi NAPZA')

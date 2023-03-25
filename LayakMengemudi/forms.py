@@ -13,8 +13,9 @@ FormSetUpdatePengemudi = inlineformset_factory(Pengemudi, Pemeriksaan, fields=('
         'kondisi' : forms.Textarea({'class':'form-control'})
         })
 
-FormPemeriksaanTerakhir = inlineformset_factory(Pengemudi, Pemeriksaan, fields=(['tensi', 'suhu', 'jam_tidur', 'gula_darah', 'kolesterol', 'alkohol', 'kondisi']), extra=1, can_delete=False, widgets={
-        'tensi' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
+FormPemeriksaanTerakhir = inlineformset_factory(Pengemudi, Pemeriksaan, fields=(['sistolik', 'diastolik', 'suhu', 'jam_tidur', 'gula_darah', 'kolesterol', 'alkohol', 'kondisi']), extra=1, can_delete=False, widgets={
+        'sistolik' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
+        'diastolik' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
         'suhu' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
         'jam_tidur' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
         'gula_darah': forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
@@ -63,14 +64,16 @@ class FormPemeriksaanCreate(ModelForm):
         model = Pemeriksaan
         fields = '__all__'
         widgets = {
-            'pengemudi': forms.Select({'class': 'form-control form-select'}),
+            'pengemudi': forms.Select({'class': 'form-control form-select select2'}),
             'tanggal': forms.TextInput({'class': 'form-control datepicker', 'autocomplete': 'off', 'value': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}),
-            'tensi': forms.TextInput({'class': 'form-control', 'placeholder': '120/80'}),
+            'sistolik': forms.NumberInput({'class': 'form-control'}),
+            'diastolik': forms.NumberInput({'class': 'form-control'}),
             'suhu': forms.TextInput({'class': 'form-control', 'placeholder': '36.1'}),
             'jam_tidur': forms.TextInput({'class': 'form-control', 'placeholder': '8'}),
             'gula_darah': forms.TextInput({'class':'form-control'}),
             'kolesterol': forms.TextInput({'class':'form-control'}),
-            'alkohol': forms.Select({'class': 'form-control form-select'}),
+            'alkohol': forms.NumberInput({'class': 'form-control'}),
+            'napza': forms.Select({'class': 'form-control form-select'}),
             'kondisi': forms.Textarea({'class': 'form-control'}),
             'status': forms.Select({'class': 'form-control form-select'}),
         }
