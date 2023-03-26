@@ -21,7 +21,7 @@ class Pengemudi(models.Model):
     status = models.CharField(max_length=2, choices=StatusJalan.choices, default=StatusJalan.TIDAK)
     periksa_terakhir = models.DateTimeField(null=True)
     
-    pasfoto = ResizedImageField(size=[300, 400], upload_to='images/%Y%m', default='no_pic.png')
+    pasfoto = ResizedImageField(size=[300, 400], upload_to='images/%Y%m', default='images/no_pic.png')
     qrcode_path = models.CharField(max_length=256)
 
     def f(instance, filename):
@@ -41,8 +41,8 @@ class Pemeriksaan(models.Model):
     pengemudi = models.ForeignKey(Pengemudi, on_delete=models.CASCADE)
     tanggal = models.DateTimeField()
     #tensi = models.CharField(max_length=10)
-    sistolik = models.IntegerField(max_length=3)
-    diastolik = models.IntegerField(max_length=2)
+    sistolik = models.IntegerField()
+    diastolik = models.IntegerField()
     suhu = models.FloatField()
     jam_tidur = models.FloatField()
     gula_darah = models.FloatField(null=True, blank=True)

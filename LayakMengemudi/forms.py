@@ -41,7 +41,7 @@ class FormPengemudiCreate(ModelForm):
             'kota_kelahiran': forms.TextInput({'class':'form-control'}),
             'alamat': forms.TextInput({'class':'form-control'}),
             'nik' : forms.TextInput({'class':'form-control', 'id':'nik'}),
-            'nomor_hp' : forms.NumberInput({'class':'form-control'}),
+            'nomor_hp' : forms.TextInput({'class':'form-control'}),
             'email' : forms.EmailInput({'class':'form-control'}),
             'pendidikan_terakhir' : forms.TextInput({'class':'form-control'}),
             'pool' : forms.TextInput({'class':'form-control'}),
