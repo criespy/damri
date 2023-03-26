@@ -13,6 +13,7 @@ FormSetUpdatePengemudi = inlineformset_factory(Pengemudi, Pemeriksaan, fields=('
         'kondisi' : forms.Textarea({'class':'form-control'})
         })
 
+#form yang digunakan untuk menampilkan hasil pemeriksaan terakhir
 FormPemeriksaanTerakhir = inlineformset_factory(Pengemudi, Pemeriksaan, fields=(['sistolik', 'diastolik', 'suhu', 'jam_tidur', 'gula_darah', 'kolesterol', 'alkohol', 'kondisi']), extra=1, can_delete=False, widgets={
         'sistolik' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
         'diastolik' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
@@ -20,7 +21,7 @@ FormPemeriksaanTerakhir = inlineformset_factory(Pengemudi, Pemeriksaan, fields=(
         'jam_tidur' : forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
         'gula_darah': forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
         'kolesterol': forms.TextInput({'class':'form-control', 'disabled':'disabled'}),
-        'alkohol': forms.Select({'class': 'form-control form-select', 'disabled':'disabled'}),
+        'alkohol': forms.TextInput({'class': 'form-control', 'disabled':'disabled'}),
         'kondisi' : forms.Textarea({'class':'form-control', 'disabled':'disabled'})
         })
 
@@ -30,6 +31,9 @@ class FormPengemudiCreate(ModelForm):
         fields = '__all__'
         exclude = ['status', 'periksa_terakhir']
         labels = {'nomor_hp':'Nomor HP', 'qrcode_path':''}
+        help_texts = {
+            'tanggal_lahir': '<span class="my-class" id="usia">Usia: </span>',
+        }
 
         widgets = {
             'nama': forms.TextInput({'class':'form-control'}),

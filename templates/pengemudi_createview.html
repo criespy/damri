@@ -37,6 +37,31 @@
   } );
 </script>
 <script>
+    let lahir = new Date(document.getElementById('id_tanggal_lahir').value);
+    let today = new Date();
+    let year = 0;
+    let usia = 0;
+    console.log(today);
+    document.getElementById('id_tanggal_lahir').onchange = function() {fillUsia()};
+    function fillUsia(){
+        lahir = new Date(document.getElementById('id_tanggal_lahir').value);
+        //usia = (today.getDay() - lahir.getDay()) /  (1000 * 60 * 60 * 24); ;
+        if (today.getMonth() < lahir.getMonth()) {
+            year = 1;
+        } else if ((today.getMonth() == lahir.getMonth()) && today.getDate() < lahir.getDate()) {
+            year = 1;
+        }
+        usia = today.getFullYear() - lahir.getFullYear() - year;
+        const bulan = today.getMonth() - lahir.getMonth();
+        const hari = today.getDate() - lahir.getDate();
+        const monthDiff = (bulan < 0 ? 12 + bulan : bulan);
+        const dayDiff = (hari < 0 ? new Date(today.getFullYear(), today.getMonth() - 1, 0).getDate() + hari : hari);
+        console.log(today.getFullYear())
+        console.log(lahir.getFullYear())
+        document.getElementById('usia').innerHTML = "Usia: " + usia + " Tahun, " + monthDiff + " Bulan, " + dayDiff + " Hari";
+    }
+</script>
+<script>
     let nik = document.getElementById('nik').value;
     document.getElementById('nik').onchange = function() {fillQRpath()};
     console.log('nik = ', nik);
