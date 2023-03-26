@@ -60,7 +60,7 @@ class PengemudiDetail(LoginRequiredMixin,DetailView):
 
     def get_queryset(self):
         id = self.kwargs['slug']
-        return Pengemudi.objects.filter(nik=id)
+        return Pengemudi.objects.all() #filter(nik=id)
 
     def get_context_data(self, **kwargs):
         detail = super(PengemudiDetail, self).get_context_data(**kwargs)
@@ -69,7 +69,7 @@ class PengemudiDetail(LoginRequiredMixin,DetailView):
         if self.request.POST:
             #detail['form'] = FormPemeriksaanCreate(self.request.POST, instance=self.object)
             detail['konteks'] = FormPemeriksaanTerakhir (
-                self.request.POST, instance=self.object)
+                self.request.POST, instance=self.object, queryset=Pemeriksaan.objects.order_by('tanggal')) #belum fix, supaya ditampilkan hasil periksa terakhir
         else:
             #detail['form'] = FormPemeriksaanCreate(instance=self.object)
             detail['konteks'] = FormPemeriksaanTerakhir(instance=self.object)
