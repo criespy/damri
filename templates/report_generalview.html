@@ -1,0 +1,43 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block content %}
+
+<!--script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script-->
+<!--script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.umd.js></script-->
+<script src=" https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js "></script>
+<!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/helpers.esm.js"></script-->
+<div class="container">
+    <h1>Report Test</h1>
+    <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
+    <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+        <canvas id="graph"></canvas>
+    </div>
+    <!-- <script type="module" src="dimensions.js"></script> -->
+    <!--script type="module" src="{% static 'js/acquisitions.js' %}"></script-->
+    <script>
+        var chrt = document.getElementById("graph");
+        var graph = new Chart(chrt, {
+           data: {
+                labels: ["CAKUNG", "PUPAR", "BOGOR", "SUKABUMI", "UI", "PENGENDAPAN"],
+                datasets: [
+                    {
+                    type: 'bar',
+                    label: "Sudah Cek",
+                    data: [27, 26, 25, 11, 11, 44],
+                    },
+                    {
+                    type: 'bar',
+                    label: "Belum Cek",
+                    data: [27, 26, 25, 11, 11, 44],
+                    }
+                ],
+           },
+           options: {
+              responsive: true,
+           },
+        });
+     </script>
+</div>
+
+{% endblock content %}

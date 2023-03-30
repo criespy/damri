@@ -113,3 +113,9 @@ class PrintIDCard(LoginRequiredMixin, DetailView):
     model = Pengemudi
     template_name = 'pengemudi_printview.html'
     slug_field = 'nik'
+
+class ReportView(LoginRequiredMixin, TemplateView):
+    login_url = 'auth/login'
+    model = Pemeriksaan
+    template_name = 'report_generalview.html'
+    

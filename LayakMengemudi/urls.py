@@ -16,6 +16,7 @@ urlpatterns = [
     path('pemeriksaan/create/<int:pk>', PemeriksaanCreate.as_view(), name='pemeriksaan-create'),
     path('pengemudi/print_id/', PrintIDCard.as_view(), name='print-id'),
     path('pengemudi/print_id/<slug:slug>', PrintIDCard.as_view(), name='print-id'),
+    path('report/', ReportView.as_view(), name='report'),
     ]
 
 if settings.DEBUG:
