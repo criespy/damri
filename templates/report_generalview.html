@@ -39,7 +39,26 @@
                 ],
            },
            options: {
-              responsive: true,
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            // This more specific font property overrides the global property
+                            font: {
+                                size: 10
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 8
+                            }
+                        }
+                    }
+                }
            },
         });
      </script>
