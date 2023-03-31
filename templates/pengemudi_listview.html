@@ -11,7 +11,7 @@
          </div>
      </div>
    <div>
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover" id="masterTable">
             <thead>
                 <tr>
                     <td>No</td>
@@ -21,6 +21,7 @@
                     <td>Pool</td>
                     <td>Bus</td>
                     <td>Edit?</td>
+                    <td>Kartu</td>
                 </tr>
             </thead>
             <tbody>
@@ -40,4 +41,14 @@
         </table>
     </div>
 </div>
+<script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready( function () {
+    $('#masterTable').DataTable( {
+        "pageLength": 5
+        } );
+    } );
+</script>
 {% endblock %}
