@@ -16,6 +16,7 @@
                 <tr>
                     <td>No</td>
                     <td>Nama</td>
+                    <td>Usia</td>
                     <td>Foto</td>
                     <td>Nik</td>
                     <td>Pool</td>
@@ -29,6 +30,7 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td><a href="{% url 'pengemudi-detail' pengemudi.nik %}" style="text-decoration:none" class="link-dark">{{ pengemudi.nama }}</td>
+                        <td id="id_tanggal_lahir">{{ pengemudi.usia }}</td>
                         <td><img src="{{ pengemudi.pasfoto.url }}" width="50"></td>
                         <td>{{ pengemudi.nik }}</td>
                         <td>{{ pengemudi.pool }}</td>
@@ -50,5 +52,30 @@
         "pageLength": 5
         } );
     } );
+</script>
+<script>
+    let lahir = new Date(document.getElementById('id_tanggal_lahir').innerHTML);
+    let today = new Date();
+    let year = 0;
+    let usia = 0;
+    console.log(today);
+    //document.getElementById('id_tanggal_lahir').onchange = function() {fillUsia()};
+    function fillUsia(){
+        lahir = new Date(document.getElementById('id_tanggal_lahir').innerHTML);
+        //usia = (today.getDay() - lahir.getDay()) /  (1000 * 60 * 60 * 24); ;
+        if (today.getMonth() < lahir.getMonth()) {
+            year = 1;
+        } else if ((today.getMonth() == lahir.getMonth()) && today.getDate() < lahir.getDate()) {
+            year = 1;
+        }
+        usia = today.getFullYear() - lahir.getFullYear() - year;
+        const bulan = today.getMonth() - lahir.getMonth();
+        const hari = today.getDate() - lahir.getDate();
+        const monthDiff = (bulan < 0 ? 12 + bulan : bulan);
+        const dayDiff = (hari < 0 ? new Date(today.getFullYear(), today.getMonth() - 1, 0).getDate() + hari : hari);
+        console.log(today.getFullYear())
+        console.log(lahir.getFullYear())
+        document.getElementById('id_tanggal_lahir').innerHTML = "Usia: " + usia + " Tahun, " + monthDiff + " Bulan, " + dayDiff + " Hari";
+    }
 </script>
 {% endblock %}

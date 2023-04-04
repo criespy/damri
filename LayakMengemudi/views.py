@@ -8,6 +8,7 @@ from .forms import FormPengemudiCreate, FormPemeriksaanCreate, FormSetUpdatePeng
 #from django.db.models import Count
 import qrcode
 from pathlib import os
+from django.db.models.expressions import RawSQL
 
 def index(request):
     return render(request, 'home.html')
@@ -51,6 +52,14 @@ class PengemudiList(LoginRequiredMixin, ListView):
     login_url = 'auth/login'
     model = Pengemudi
     template_name = 'pengemudi_listview.html'
+
+    def get_queryset(self):
+        raw = "SELECT cast(round((julianday('now') - julianday(tanggal_lahir)) / 365) as int) FROM LayakMengemudi_pengemudi"
+
+        #raw = 'Select DATEDIFF(CURDATE(), `yourappname_patienttable`.`dob`) from `yourappname_patienttable` u where u.`id`=`yourappname_patienttable`.id'
+
+        return Pengemudi.objects.all().annotate(usia=RawSQL(raw, ()))#filter(id=1)
+
 
 class PengemudiDetail(LoginRequiredMixin,DetailView):
     login_url = 'auth/login'
