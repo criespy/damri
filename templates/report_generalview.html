@@ -8,16 +8,6 @@
 <!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 <!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/helpers.esm.js"></script-->
 <div class="container">
-    <div>
-        <label class="form-label">Pilih Pool: </label> <select class="form-control form-select">
-            <option>CAKUNG</option>
-            <option>PUPAR</option>
-            <option>BOGOR</option>
-            <option>SUKABUMI</option>
-            <option>UI</option>
-            <option>PENGENDAPAN</option>
-        </select>
-    </div>
     <h2>Grafik Pemeriksaan Kesehatan Driver</h2>
     <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
@@ -27,7 +17,19 @@
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
         <canvas id="persen"></canvas>
     </div>
-    <h2>Pool Cakung</h2>
+    <div>
+        <label class="form-label">Pilih Pool: </label>
+        <select id ="pool" class="form-control form-select" onchange="pilihPool()">
+            <option value="CAKUNG">CAKUNG</option>
+            <option value="PUPAR">PUPAR</option>
+            <option value="BOGOR">BOGOR</option>
+            <option value="SUKABUMI">SUKABUMI</option>
+            <option value="UI">UI</option>
+            <option value="PENGENDAPAN">PENGENDAPAN</option>
+        </select>
+    </div>
+    <br>
+    <h2 id="headerpool"></h2>
     <h4>Kolesterol</h4>
     <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
@@ -65,6 +67,17 @@
     </div>
     <!-- <script type="module" src="dimensions.js"></script> -->
     <!--script type="module" src="{% static 'js/acquisitions.js' %}"></script-->
+    <script>
+        pool = document.getElementById('pool').value;
+        judul = document.getElementById('headerpool').innerHTML;
+        function pilihPool(){
+            pool = document.getElementById('pool').value;
+            console.log(pool);
+            console.log(judul);
+            document.getElementById('headerpool').innerHTML = "Pool " + pool;
+        }
+        
+    </script>
     <script>
         var chrt = document.getElementById("graph");
         var graph = new Chart(chrt, {
