@@ -11,7 +11,7 @@
     <h2>Grafik Pemeriksaan Kesehatan Driver</h2>
     <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-        <canvas id="graph"></canvas>
+        <canvas id="result"></canvas>
     </div>
     <h2>Grafik Pemeriksaan Kesehatan Driver</h2>
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
@@ -19,7 +19,8 @@
     </div>
     <div>
         <label class="form-label">Pilih Pool: </label>
-        <select id ="pool" class="form-control form-select" onchange="pilihPool()">
+        <select id ="pool" class="form-control form-select" onchange="pilihPool();callGraph();">
+            <option value="" disabled selected>Pilih Pool</option>
             <option value="CAKUNG">CAKUNG</option>
             <option value="PUPAR">PUPAR</option>
             <option value="BOGOR">BOGOR</option>
@@ -33,37 +34,37 @@
     <h4>Kolesterol</h4>
     <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-        <canvas id="cakung1"></canvas>
+        <canvas id="kolesterol"></canvas>
     </div>
     <h4>Glukosa</h4>
     <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-        <canvas id="cakung2"></canvas>
+        <canvas id="glukosa"></canvas>
     </div>
     <h4>Sistolik</h4>
     <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-        <canvas id="cakung3"></canvas>
+        <canvas id="sistolik"></canvas>
     </div>
     <h4>Diastolik</h4>
     <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-        <canvas id="cakung4"></canvas>
+        <canvas id="diastolik"></canvas>
     </div>
     <h4>Nadi</h4>
     <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-        <canvas id="cakung5"></canvas>
+        <canvas id="nadi"></canvas>
     </div>
     <h4>Alkohol</h4>
     <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-        <canvas id="cakung6"></canvas>
+        <canvas id="alkohol"></canvas>
     </div>
     <h4>Buta Warna</h4>
     <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-        <canvas id="cakung7"></canvas>
+        <canvas id="butawarna"></canvas>
     </div>
     <!-- <script type="module" src="dimensions.js"></script> -->
     <!--script type="module" src="{% static 'js/acquisitions.js' %}"></script-->
@@ -76,11 +77,39 @@
             console.log(judul);
             document.getElementById('headerpool').innerHTML = "Pool " + pool;
         }
+        function graphDestroy() {
+            //var chartStatusnya = chartKolesterol.chart;
+            //
+            let chartStatus = Chart.getChart("kolesterol"); // <canvas> id
+            console.log(chartStatus);
+            if (chartStatus != undefined) {
+                console.log("destroying..");
+                chartKolesterol.destroy();
+                chartGlukosa.destroy();
+                chartSistolik.destroy();
+                chartDiastolik.destroy();
+                chartNadi.destroy();
+                chartAlkohol.destroy();
+                chartButawarna.destroy();
+            } else {
+                console.log("graph belum ada");
+            }
+        }
+
+        function callGraph() {
+            graphKolesterol();
+            graphGlukosa();
+            graphSistolik();
+            graphDiastolik();
+            graphNadi();
+            graphAlkohol();
+            graphButawarna();
+        }
         
     </script>
     <script>
-        var chrt = document.getElementById("graph");
-        var graph = new Chart(chrt, {
+        var result = document.getElementById("result");
+        var chartResult = new Chart(result, {
            data: {
                 labels: ["CAKUNG", "PUPAR", "BOGOR", "SUKABUMI", "UI", "PENGENDAPAN"],
                 datasets: [
@@ -126,8 +155,8 @@
         });
     </script>
     <script>
-        var chrt = document.getElementById("persen");
-        var graph = new Chart(chrt, {
+        var persen = document.getElementById("persen");
+        var chartPersen = new Chart(persen, {
            data: {
                 labels: ["CAKUNG", "PUPAR", "BOGOR", "SUKABUMI", "UI", "PENGENDAPAN"],
                 datasets: [
@@ -173,295 +202,332 @@
         });
     </script>
     <script>
-        var chrt = document.getElementById("cakung1");
-        var graph = new Chart(chrt, {
-           data: {
-                labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
-                datasets: [
-                    {
-                    type: 'line',
-                    label: "Standar",
-                    data: [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, ],
-                    },
-                    {
-                    type: 'bar',
-                    label: "Kolesterol",
-                    data: [194, 242,206, 225, 180, 185, 211, 213, 176, 170, 281, 183, 149, 192, 227, 143, 165, 184,132, 198, 249, 186, 186, 200, 170],
-                    },
-                ],
-           },
-           options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        labels: {
-                            // This more specific font property overrides the global property
-                            font: {
-                                size: 10
-                            }
-                        }
-                    }
+        var kolesterol = document.getElementById("kolesterol");
+        var chartKolesterol = new Chart(kolesterol, {}); 
+
+        function graphKolesterol() {
+            chartKolesterol.destroy();
+            chartKolesterol = new Chart(kolesterol, {
+                data: {
+                        labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
+                        datasets: [
+                            {
+                            type: 'line',
+                            label: "Standar",
+                            data: [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, ],
+                            },
+                            {
+                            type: 'bar',
+                            label: "Kolesterol",
+                            data: [194, 242,206, 225, 180, 185, 211, 213, 176, 170, 281, 183, 149, 192, 227, 143, 165, 184,132, 198, 249, 186, 186, 200, 170],
+                            },
+                        ],
                 },
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 8
+                options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    // This more specific font property overrides the global property
+                                    font: {
+                                        size: 10
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    font: {
+                                        size: 8
+                                    }
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    
+                                }
+                            }
+                        }
+                },
+            });
+     
+            //console.log(chartKolesterol.data);
+            //console.log(Chart.getChart("kolesterol"));
+        }
+       
+    </script>
+    <script>
+        var glukosa = document.getElementById("glukosa");
+        var chartGlukosa = new Chart(glukosa);
+        function graphGlukosa(){
+            chartGlukosa.destroy();
+            chartGlukosa = new Chart(glukosa, {
+                data: {
+                    labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
+                    datasets: [
+                        {
+                        type: 'line',
+                        label: "Batas Atas",
+                        data: [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, ],
+                        },
+                        {
+                        type: 'bar',
+                        label: "Glukosa",
+                        data: [107, 86, 133, 89, 140, 140, 86, 126, 140, 93, 162, 91, 275, 134, 126, 105, 336, 159,110, 135, 88, 130, 130, 45, 104],
+                        },
+                        {
+                        type: 'line',
+                        label: "Batas Bawah",
+                        data: [70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, ],
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                // This more specific font property overrides the global property
+                                font: {
+                                    size: 10
+                                }
                             }
                         }
                     },
-                    y: {
-                        ticks: {
+                    scales: {
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 8
+                                }
+                            }
+                        },
+                        y: {
+                            ticks: {
                             
-                        }
-                    }
-                }
-           },
-        });
-    </script>
-    <script>
-        var chrt = document.getElementById("cakung2");
-        var graph = new Chart(chrt, {
-            data: {
-                labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
-                datasets: [
-                    {
-                    type: 'line',
-                    label: "Batas Atas",
-                    data: [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, ],
-                    },
-                    {
-                    type: 'bar',
-                    label: "Glukosa",
-                    data: [107, 86, 133, 89, 140, 140, 86, 126, 140, 93, 162, 91, 275, 134, 126, 105, 336, 159,110, 135, 88, 130, 130, 45, 104],
-                    },
-                    {
-                    type: 'line',
-                    label: "Batas Bawah",
-                    data: [70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, ],
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        labels: {
-                            // This more specific font property overrides the global property
-                            font: {
-                                size: 10
                             }
                         }
                     }
                 },
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 8
+            });
+        }
+        
+    </script>
+    <script>
+        var sistolik = document.getElementById("sistolik");
+        var chartSistolik = new Chart(sistolik);
+        function graphSistolik(){
+            chartSistolik.destroy();
+            chartSistolik = new Chart(sistolik, {
+                data: {
+                    labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
+                    datasets: [
+                        {
+                        type: 'line',
+                        label: "Standar",
+                        data: [120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, ],
+                        },
+                        {
+                        type: 'bar',
+                        label: "Sistolik",
+                        data: [144, 140, 141, 134, 136, 123, 135, 135, 124, 152, 165, 141, 150, 139, 125, 184, 135, 120,125, 162, 88, 142, 137, 143, 150],
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                // This more specific font property overrides the global property
+                                font: {
+                                    size: 10
+                                }
                             }
                         }
                     },
-                    y: {
-                        ticks: {
-                           
-                        }
-                    }
-                }
-            },
-        });
-    </script>
-    <script>
-        var chrt = document.getElementById("cakung3");
-        var graph = new Chart(chrt, {
-            data: {
-                labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
-                datasets: [
-                    {
-                    type: 'line',
-                    label: "Standar",
-                    data: [120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, ],
-                    },
-                    {
-                    type: 'bar',
-                    label: "Sistolik",
-                    data: [144, 140, 141, 134, 136, 123, 135, 135, 124, 152, 165, 141, 150, 139, 125, 184, 135, 120,125, 162, 88, 142, 137, 143, 150],
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        labels: {
-                            // This more specific font property overrides the global property
-                            font: {
-                                size: 10
+                    scales: {
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 8
+                                }
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                
                             }
                         }
                     }
                 },
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 8
+            });
+        }
+
+    </script>
+    <script>
+        var diastolik = document.getElementById("diastolik");
+        var chartDiastolik = new Chart(diastolik);
+        function graphDiastolik() {
+            chartDiastolik.destroy();
+            chartDiastolik = new Chart(diastolik, {
+                data: {
+                    labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
+                    datasets: [
+                        {
+                        type: 'line',
+                        label: "Standar",
+                        data: [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80 ],
+                        },
+                        {
+                        type: 'bar',
+                        label: "Diastolik",
+                        data: [97, 94, 95, 97, 80, 79, 92, 84, 71, 102, 106, 95, 90, 89, 144, 88, 91, 95, 83, 92, 73, 70, 78, 91, 78],
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                // This more specific font property overrides the global property
+                                font: {
+                                    size: 10
+                                }
                             }
                         }
                     },
-                    y: {
-                        ticks: {
-                            
-                        }
-                    }
-                }
-            },
-        });
-    </script>
-    <script>
-        var chrt = document.getElementById("cakung4");
-        var graph = new Chart(chrt, {
-            data: {
-                labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
-                datasets: [
-                    {
-                    type: 'line',
-                    label: "Standar",
-                    data: [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80 ],
-                    },
-                    {
-                    type: 'bar',
-                    label: "Diastolik",
-                    data: [97, 94, 95, 97, 80, 79, 92, 84, 71, 102, 106, 95, 90, 89, 144, 88, 91, 95, 83, 92, 73, 70, 78, 91, 78],
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        labels: {
-                            // This more specific font property overrides the global property
-                            font: {
-                                size: 10
+                    scales: {
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 8
+                                }
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                
                             }
                         }
                     }
                 },
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 8
+            });
+        }
+        
+    </script>
+    <script>
+        var nadi = document.getElementById("nadi");
+        var chartNadi = new Chart(nadi);
+        function graphNadi() {
+            chartNadi.destroy();
+            chartNadi = new Chart(nadi, {
+                data: {
+                    labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
+                    datasets: [
+                        {
+                        type: 'line',
+                        label: "Batas atas",
+                        data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 ],
+                        },
+                        {
+                        type: 'bar',
+                        label: "Nadi",
+                        data: [81, 78, 81, 84, 82, 74, 75, 75, 72, 62, 99, 95, 93, 81, 74, 89, 89, 79, 92, 83, 86, 84, 82, 87, 87],
+                        },
+                        {
+                        type: 'line',
+                        label: "Batas bawah",
+                        data: [60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60 ],
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                // This more specific font property overrides the global property
+                                font: {
+                                    size: 10
+                                }
                             }
                         }
                     },
-                    y: {
-                        ticks: {
-                            
-                        }
-                    }
-                }
-            },
-        });
-    </script>
-    <script>
-        var chrt = document.getElementById("cakung5");
-        var graph = new Chart(chrt, {
-            data: {
-                labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
-                datasets: [
-                    {
-                    type: 'line',
-                    label: "Batas atas",
-                    data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 ],
-                    },
-                    {
-                    type: 'bar',
-                    label: "Nadi",
-                    data: [81, 78, 81, 84, 82, 74, 75, 75, 72, 62, 99, 95, 93, 81, 74, 89, 89, 79, 92, 83, 86, 84, 82, 87, 87],
-                    },
-                    {
-                    type: 'line',
-                    label: "Batas bawah",
-                    data: [60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60 ],
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        labels: {
-                            // This more specific font property overrides the global property
-                            font: {
-                                size: 10
+                    scales: {
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 8
+                                }
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                
                             }
                         }
                     }
                 },
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 8
+            });
+        }
+        
+    </script>
+    <script>
+        var alkohol = document.getElementById("alkohol");
+        var chartAlkohol = new Chart(alkohol);
+        function graphAlkohol() {
+            chartAlkohol.destroy();
+            chartAlkohol = new Chart(alkohol, {
+                data: {
+                    labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
+                    datasets: [
+                        {
+                        type: 'bar',
+                        label: "Kadar alkohol",
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                // This more specific font property overrides the global property
+                                font: {
+                                    size: 10
+                                }
                             }
                         }
                     },
-                    y: {
-                        ticks: {
-                            
-                        }
-                    }
-                }
-            },
-        });
-    </script>
-    <script>
-        var chrt = document.getElementById("cakung6");
-        var graph = new Chart(chrt, {
-            data: {
-                labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
-                datasets: [
-                    {
-                    type: 'bar',
-                    label: "Kadar alkohol",
-                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        labels: {
-                            // This more specific font property overrides the global property
-                            font: {
-                                size: 10
+                    scales: {
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 8
+                                }
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                callback: function(value){return value+ "%"}
                             }
                         }
                     }
                 },
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 8
-                            }
-                        }
-                    },
-                    y: {
-                        ticks: {
-                            callback: function(value){return value+ "%"}
-                        }
-                    }
-                }
-            },
-        });
+            });
+        }
+        
     </script>
     <script>
-        var chrt = document.getElementById("cakung7");
-        var graph = new Chart(chrt, {
+        var butawarna = document.getElementById("butawarna");
+        var chartButawarna = new Chart(butawarna);
+        function graphButawarna() {
+            chartButawarna.destroy();
+            chartButawarna = new Chart(butawarna, {
             data: {
                 labels: ["Siswanto", "Toha", "Nurohmad", "Toni Hermansyah", "Yasrizal", "Nani", "Maman", "Karmen Sirait", "Parsono", "Hartono", "Teguh W", "Handito", "Syarifudin", "Budi Rahmat S", "Martoyo", "Mustangin", "Juana", "Riyadi", "Trio Agung", "Amin Maryanto", "Suzana S", "Willy", "Novidun", "roy Daryanto", "Jeko Putra"],
                 datasets: [
@@ -502,6 +568,7 @@
                 }
             },
         });
+        }
     </script>
 </div>
 
