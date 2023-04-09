@@ -14,11 +14,11 @@ def index(request):
     return render(request, 'home.html')
 
 class Beranda(LoginRequiredMixin, TemplateView):
-    login_url = 'auth/login'
+    login_url = 'login'
     template_name = 'beranda.html'
 
 class PengemudiCreate(LoginRequiredMixin, CreateView):
-    login_url = 'auth/login'
+    login_url = 'login'
     model = Pengemudi
     template_name = 'pengemudi_createview.html'
     form_class = FormPengemudiCreate
@@ -43,13 +43,13 @@ class PengemudiCreate(LoginRequiredMixin, CreateView):
         img.save((imgfile))
 
 class PengemudiUpdate(LoginRequiredMixin, UpdateView):
-    login_url = 'auth/login'
+    login_url = 'login'
     model = Pengemudi
     template_name = 'pengemudi_updateview.html'
     form_class = FormPengemudiCreate
 
 class PengemudiList(LoginRequiredMixin, ListView):
-    login_url = 'auth/login'
+    login_url = 'login'
     model = Pengemudi
     template_name = 'pengemudi_listview.html'
 
@@ -62,7 +62,7 @@ class PengemudiList(LoginRequiredMixin, ListView):
         return Pengemudi.objects.raw(q)
 
 class PengemudiDetail(LoginRequiredMixin,DetailView):
-    login_url = 'auth/login'
+    login_url = 'login'
     model = Pengemudi
     template_name = 'pengemudi_detailview.html'
     slug_field = 'nik'
@@ -85,13 +85,13 @@ class PengemudiDetail(LoginRequiredMixin,DetailView):
         return detail
 
 class PemeriksaanCreate(LoginRequiredMixin, CreateView):
-    login_url = 'auth/login'
+    login_url = 'login'
     model = Pemeriksaan
     template_name = 'pemeriksaan_createview2.html'
     form_class = FormPemeriksaanCreate
 
 class PemeriksaanUpdate(LoginRequiredMixin, UpdateView):
-    login_url = 'auth/login'
+    login_url = 'login'
     model = Pengemudi
     template_name = 'pemeriksaan_createview.html'
     form_class = FormPemeriksaanCreate
@@ -113,18 +113,18 @@ class PemeriksaanUpdate(LoginRequiredMixin, UpdateView):
         return detail
 
 class PemeriksaanList(LoginRequiredMixin, ListView):
-    login_url = 'auth/login'
+    login_url = 'login'
     model = Pemeriksaan
     template_name = 'pemeriksaan_listview'
 
 class PrintIDCard(LoginRequiredMixin, DetailView):
-    login_url = 'auth/login'
+    login_url = 'login'
     model = Pengemudi
     template_name = 'pengemudi_printview.html'
     slug_field = 'nik'
 
 class ReportView(LoginRequiredMixin, TemplateView):
-    login_url = 'auth/login'
+    login_url = 'login'
     model = Pemeriksaan
     template_name = 'report_generalview.html'
     
