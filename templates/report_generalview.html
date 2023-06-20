@@ -69,31 +69,17 @@
     <!-- <script type="module" src="dimensions.js"></script> -->
     <!--script type="module" src="{% static 'js/acquisitions.js' %}"></script-->
     <script>
-        pool = document.getElementById('pool').value;
-        judul = document.getElementById('headerpool').innerHTML;
+        var pool = document.getElementById('pool').value;
+        var judul = document.getElementById('headerpool').innerHTML;
+        var dataCakung = [
+            ['Siswanto',194,107,144,97,81,0,0],
+        ]
+
         function pilihPool(){
             pool = document.getElementById('pool').value;
             console.log(pool);
             console.log(judul);
             document.getElementById('headerpool').innerHTML = "Pool " + pool;
-        }
-        function graphDestroy() {
-            //var chartStatusnya = chartKolesterol.chart;
-            //
-            let chartStatus = Chart.getChart("kolesterol"); // <canvas> id
-            console.log(chartStatus);
-            if (chartStatus != undefined) {
-                console.log("destroying..");
-                chartKolesterol.destroy();
-                chartGlukosa.destroy();
-                chartSistolik.destroy();
-                chartDiastolik.destroy();
-                chartNadi.destroy();
-                chartAlkohol.destroy();
-                chartButawarna.destroy();
-            } else {
-                console.log("graph belum ada");
-            }
         }
 
         function callGraph() {

@@ -72,8 +72,13 @@ class PengemudiDetail(LoginRequiredMixin,DetailView):
         return Pengemudi.objects.all() #filter(nik=id)
 
     def get_context_data(self, **kwargs):
+        #metode yang diambil dari aparApp
+        context = super().get_context_data(**kwargs)
+        pengemudi = self.get_object()
+        pemeriksaan_list = Pemeriksaan.objects.filter(pengemudi_id=pengemudi).order_by('-tanggal')
+        context['pemeriksaan_list'] = pemeriksaan_list
+        #Queryset (metode sebelum aparApp)
         detail = super(PengemudiDetail, self).get_context_data(**kwargs)
-        #Queryset
         #detail['periksaTerakhir'] = Pengemudi.objects.annotate(periksa_count=Count('pemeriksaan')).filter(periksa_count=0)
         if self.request.POST:
             #detail['form'] = FormPemeriksaanCreate(self.request.POST, instance=self.object)
@@ -82,7 +87,7 @@ class PengemudiDetail(LoginRequiredMixin,DetailView):
         else:
             #detail['form'] = FormPemeriksaanCreate(instance=self.object)
             detail['konteks'] = FormPemeriksaanTerakhir(instance=self.object)
-        return detail
+        return context
 
 class PemeriksaanCreate(LoginRequiredMixin, CreateView):
     login_url = 'login'
