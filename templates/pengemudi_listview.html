@@ -14,21 +14,21 @@
         <table class="table table-striped table-hover" id="masterTable">
             <thead>
                 <tr>
-                    <td>No</td>
-                    <td>Nama</td>
-                    <td>Usia</td>
-                    <td>Foto</td>
-                    <td>Nik</td>
-                    <td>Pool</td>
-                    <td>Bus</td>
-                    <td>Edit?</td>
-                    <td>Kartu</td>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Usia</th>
+                    <th>Foto</th>
+                    <th>Nik</th>
+                    <th>Pool</th>
+                    <th>Bus</th>
+                    <th>Edit?</th>
+                    <th>Kartu</th>
                 </tr>
             </thead>
             <tbody>
                 {% for pengemudi in object_list %}
                     <tr>
-                        <td>{{ forloop.counter }}</td>
+                        <th>{{ forloop.counter }}</td>
                         <td><a href="{% url 'pengemudi-detail' pengemudi.nik %}" style="text-decoration:none" class="link-dark">{{ pengemudi.nama }}</td>
                         <td id="id_tanggal_lahir">{{ pengemudi.usia }}</td>
                         <td><img src="{{ pengemudi.pasfoto.url }}" width="50"></td>
@@ -40,16 +40,44 @@
                     </tr>
                 {% endfor %}
             </tbody>
+            <tfoot>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Usia</th>
+                    <th>Foto</th>
+                    <th>Nik</th>
+                    <th>Pool</th>
+                    <th>Bus</th>
+                    <th>Edit?</th>
+                    <th>Kartu</th>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
 <script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
 <script src="{% static 'js/jquery-ui.js' %}"></script>
 <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<!--script src="{% static 'js/dataTables.fixedColumns.min.js' %}"></script-->
+
 <script type="text/javascript">
     $(document).ready( function () {
-    $('#masterTable').DataTable( {
-        "pageLength": 5
+        // Setup - add a text input to each footer cell
+        $('#masterTable tfoot th').each( function (i) {
+            var title = $('#masterTable thead th').eq( $(this).index() ).text();
+            $(this).html( '<input type="text" placeholder="'+title+'" data-index="'+i+'" />' );
+        } );
+        //Datatables
+        var table = $('#masterTable').DataTable( {
+            "pageLength": 5
+            } );
+        // Filter event handler
+        $( table.table().container() ).on( 'keyup', 'tfoot input', function () {
+            table
+                .column( $(this).data('index') )
+                .search( this.value )
+                .draw();
         } );
     } );
 </script>

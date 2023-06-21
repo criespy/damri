@@ -5,3 +5,7 @@ body {
 .navbar {
   margin-bottom: 20px;
 }
+
+th input {
+  width: 90%;
+}
