@@ -44,7 +44,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col sm-10">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Detail Pemeriksaan Terakhir</button>
+                        <!--button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Detail Pemeriksaan Terakhir</butto-->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#history">History Pemeriksaan</button>
                     </div>
                     <div class="col sm-4">
@@ -91,41 +91,46 @@
 <div class="modal fade bd-example-modal-xl" id="history" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
-        History Pemeriksaan
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tanggal</th>
-                    <th scope="col">Sistolik</th>
-                    <th scope="col">Diastolik</th>
-                    <th scope="col">Suhu</th>
-                    <th scope="col">Jam Tidur</th>
-                    <th scope="col">Gula Darah</th>
-                    <th scope="col">Kolesterol</th>
-                    <th scope="col">Alkohol</th>
-                    <th scope="col">Kondisi</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if pemeriksaan_list %}
-                {% for cek in pemeriksaan_list %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ cek.tanggal }}</td>
-                    <td>{{ cek.sistolik }}</td>
-                    <td>{{ cek.diastolik }}</td>
-                    <td>{{ cek.suhu }}</td>
-                    <td>{{ cek.jam_tidur}}</td>
-                    <td>{{ cek.gula_darah }}</td>
-                    <td>{{ cek.kolesterol }}</td>
-                    <td>{{ cek.alkohol }}</td>
-                    <td>{{ cek.kondisi}}</td>
-                </tr>
-                {% endfor %}
-                {% endif %}
-            </tbody>
-        </table>
+        <div class="modal-header">
+            <h5 class="modal-title">History Pemeriksaan</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tanggal</th>
+                        <th scope="col">Sistolik</th>
+                        <th scope="col">Diastolik</th>
+                        <th scope="col">Suhu</th>
+                        <th scope="col">Jam Tidur</th>
+                        <th scope="col">Gula Darah</th>
+                        <th scope="col">Kolesterol</th>
+                        <th scope="col">Alkohol</th>
+                        <th scope="col">Kondisi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if pemeriksaan_list %}
+                    {% for cek in pemeriksaan_list %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ cek.tanggal }}</td>
+                        <td>{{ cek.sistolik }}</td>
+                        <td>{{ cek.diastolik }}</td>
+                        <td>{{ cek.suhu }}</td>
+                        <td>{{ cek.jam_tidur}}</td>
+                        <td>{{ cek.gula_darah }}</td>
+                        <td>{{ cek.kolesterol }}</td>
+                        <td>{{ cek.alkohol }}</td>
+                        <td>{{ cek.kondisi}}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
       </div>
     </div>
   </div>
