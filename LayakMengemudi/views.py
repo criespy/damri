@@ -132,4 +132,12 @@ class ReportView(LoginRequiredMixin, TemplateView):
     login_url = 'login'
     model = Pemeriksaan
     template_name = 'report_generalview.html'
+
+class ReportPemeriksaanHarian(LoginRequiredMixin, ListView):
+    login_url = 'login'
+    model = Pemeriksaan
+    template_name = 'report_pemeriksaan_harian.html'
+
+    def get_queryset(self):
+        return Pemeriksaan.objects.all()
     
