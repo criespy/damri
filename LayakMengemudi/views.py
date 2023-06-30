@@ -9,6 +9,8 @@ from .forms import FormPengemudiCreate, FormPemeriksaanCreate, FormSetUpdatePeng
 import qrcode
 from pathlib import os
 from django.db.models.expressions import RawSQL
+from datetime import datetime
+#import datetime
 
 def index(request):
     return render(request, 'home.html')
@@ -139,5 +141,6 @@ class ReportPemeriksaanHarian(LoginRequiredMixin, ListView):
     template_name = 'report_pemeriksaan_harian.html'
 
     def get_queryset(self):
-        return Pemeriksaan.objects.all()
+        tanggal = datetime.now().date()#datetime.date.today()
+        return Pemeriksaan.objects.filter(tanggal__date = tanggal)
     

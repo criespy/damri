@@ -2,16 +2,17 @@
 {% load static %}
 {% block content %}
 <div class="container-fluid">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 px-4 border-bottom">
         <h2 class="h2">Report Pemeriksaan Harian</h2>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive px-4">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Tanggal</th>
               <th scope="col">Pengemudi</th>
+              <th scope="col">Pool</th>
               <th scope="col">Sistolik</th>
               <th scope="col">Diastolik</th>
               <th scope="col">Suhu</th>
@@ -26,17 +27,18 @@
           {% for pemeriksaan in object_list %}
           <tr>
             <th>{{ forloop.counter }}</th>
-            <td>{{ pemeriksaan.pengemudi }}</td>
             <td>{{ pemeriksaan.tanggal }}</td>
-            <td>{{ pemeriksaan.sistolik }}</td>
-            <td>{{ pemeriksaan.diastolik }}</td>
-            <td>{{ pemeriksaan.suhu }}</td>
-            <td>{{ pemeriksaan.jam_tidur }}</td>
-            <td>{{ pemeriksaan.gula_darah }}</td>
-            <td>{{ pemeriksaan.kolesterol }}</td>
-            <td>{{ pemeriksaan.alkohol }}</td>
+            <td>{{ pemeriksaan.pengemudi }}</td>
+            <td>{{ pemeriksaan.pengemudi.pool }}</td>
+            <td class="text-center">{{ pemeriksaan.sistolik }}</td>
+            <td class="text-center">{{ pemeriksaan.diastolik }}</td>
+            <td class="text-center">{{ pemeriksaan.suhu }}</td>
+            <td class="text-center">{{ pemeriksaan.jam_tidur }}</td>
+            <td class="text-center">{{ pemeriksaan.gula_darah }}</td>
+            <td class="text-center">{{ pemeriksaan.kolesterol }}</td>
+            <td class="text-center">{{ pemeriksaan.alkohol }}</td>
             <td>{{ pemeriksaan.kondisi }}</td>
-            <td>{{ pemeriksaan.status }}</td>
+            <td>{{ pemeriksaan.get_status_display }}</td>
           </tr>
           {% endfor %}
         </table>
