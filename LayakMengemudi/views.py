@@ -12,6 +12,7 @@ from django.db.models.expressions import RawSQL
 from datetime import datetime, date
 #import datetime
 from django.db.models import Q
+from django.utils.timezone import timedelta
 
 def index(request):
     return render(request, 'home.html')
@@ -142,8 +143,14 @@ class ReportPemeriksaanHarian(LoginRequiredMixin, ListView):
     template_name = 'report_pemeriksaan_harian.html'
 
     def get_queryset(self):
-        daritanggal = datetime(2023, 6, 30, 0, 0, 0)#datetime.now().date()#datetime.date.today()
-        sampaitanggal = datetime(2023, 6, 30, 23, 59, 59)
-        return Pemeriksaan.objects.filter(Q(tanggal__gte = daritanggal) & Q(tanggal__lte = sampaitanggal)).order_by('tanggal')
+        queryset = super().get_queryset()
+        daritanggal = self.request.GET.get('fromDate') #datetime(2023, 6, 30, 0, 0, 0)#datetime.now().date()#datetime.date.today()
+        sampaitanggal = self.request.GET.get('toDate') #datetime(2023, 6, 30, 23, 59, 59)
+        if daritanggal and sampaitanggal:
+            daritanggal = datetime.strptime(daritanggal, '%Y-%m-%d')
+            sampaitanggal = datetime.strptime(sampaitanggal, '%Y-%m-%d') + timedelta(days=1) #supaya include hari berjalan pakai timedelta
+            queryset = queryset.filter(tanggal__range=(daritanggal, sampaitanggal))
+
+        return queryset #Pemeriksaan.objects.filter(Q(tanggal__gte = daritanggal) & Q(tanggal__lte = sampaitanggal)).order_by('tanggal')
     #Pemeriksaan.objects.filter(tanggal__range = (daritanggal, sampaitanggal)).order_by('tanggal')  #Pemeriksaan.objects.filter(tanggal__date = daritanggal)#
     

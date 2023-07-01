@@ -6,7 +6,8 @@
         <h2 class="h2">Report Pemeriksaan Harian</h2>
     </div>
       <div class="row row-input-tanggal pb-2 mb-3 px-4 border-bottom">
-        <form class="form-inline"></form>
+        <form action="" method="get" class="form-inline">
+        {% csrf_token %}
           <div class="form-group row">
             <label for="fromDate" class="col-sm-1 col-form-label form-label">Dari:</label>
             <div class="col-sm-4">
