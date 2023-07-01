@@ -148,9 +148,13 @@ class ReportPemeriksaanHarian(LoginRequiredMixin, ListView):
         sampaitanggal = self.request.GET.get('toDate') #datetime(2023, 6, 30, 23, 59, 59)
         if daritanggal and sampaitanggal:
             daritanggal = datetime.strptime(daritanggal, '%Y-%m-%d')
-            sampaitanggal = datetime.strptime(sampaitanggal, '%Y-%m-%d') + timedelta(days=1) #supaya include hari berjalan pakai timedelta
-            queryset = queryset.filter(tanggal__range=(daritanggal, sampaitanggal))
+            sampaitanggal = datetime.strptime(sampaitanggal, '%Y-%m-%d').replace(hour=23, minute=59, second=59) #jika tidak pakai replace maka jamnya 0:0:0 dan input setelah itu dianggap beda hari
+            #queryset = queryset.filter(tanggal__range=(daritanggal, sampaitanggal))
+        else:
+            daritanggal = datetime.now().date()
+            sampaitanggal = datetime.now().date() #+ timedelta(days=1)
 
+        queryset = queryset.filter(tanggal__range=(daritanggal, sampaitanggal)).order_by('tanggal')
         return queryset #Pemeriksaan.objects.filter(Q(tanggal__gte = daritanggal) & Q(tanggal__lte = sampaitanggal)).order_by('tanggal')
     #Pemeriksaan.objects.filter(tanggal__range = (daritanggal, sampaitanggal)).order_by('tanggal')  #Pemeriksaan.objects.filter(tanggal__date = daritanggal)#
     

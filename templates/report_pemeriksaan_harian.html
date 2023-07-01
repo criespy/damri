@@ -11,11 +11,11 @@
           <div class="form-group row">
             <label for="fromDate" class="col-sm-1 col-form-label form-label">Dari:</label>
             <div class="col-sm-4">
-              <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="fromDate" name="fromDate" placeholder="From date" aria-label="From date">
+              <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="fromDate" name="fromDate" placeholder="From date" aria-label="From date" value="{{ request.GET.fromDate }}"">
             </div>
             <label for="toDate" class="col-sm-1 col-form-label form-label">s/d</label>
             <div class="col-sm-4">
-              <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="toDate" name="toDate" placeholder="To date" aria-label="To date">
+              <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="toDate" name="toDate" placeholder="To date" aria-label="To date" value="{{ request.GET.toDate }}"">
             </div>
             <div class="col-sm-2">
               <button type="submit" class="btn btn-primary">Submit</button>
