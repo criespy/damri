@@ -9,8 +9,9 @@ from .forms import FormPengemudiCreate, FormPemeriksaanCreate, FormSetUpdatePeng
 import qrcode
 from pathlib import os
 from django.db.models.expressions import RawSQL
-from datetime import datetime
+from datetime import datetime, date
 #import datetime
+from django.db.models import Q
 
 def index(request):
     return render(request, 'home.html')
@@ -141,6 +142,8 @@ class ReportPemeriksaanHarian(LoginRequiredMixin, ListView):
     template_name = 'report_pemeriksaan_harian.html'
 
     def get_queryset(self):
-        tanggal = datetime.now().date()#datetime.date.today()
-        return Pemeriksaan.objects.filter(tanggal__date = tanggal)
+        daritanggal = datetime(2023, 6, 30, 0, 0, 0)#datetime.now().date()#datetime.date.today()
+        sampaitanggal = datetime(2023, 6, 30, 23, 59, 59)
+        return Pemeriksaan.objects.filter(Q(tanggal__gte = daritanggal) & Q(tanggal__lte = sampaitanggal)).order_by('tanggal')
+    #Pemeriksaan.objects.filter(tanggal__range = (daritanggal, sampaitanggal)).order_by('tanggal')  #Pemeriksaan.objects.filter(tanggal__date = daritanggal)#
     
