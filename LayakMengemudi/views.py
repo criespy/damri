@@ -58,8 +58,9 @@ class PengemudiList(LoginRequiredMixin, ListView):
     template_name = 'pengemudi_listview.html'
 
     def get_queryset(self):
-        q = "SELECT *, cast(round((julianday('now') - julianday(tanggal_lahir)) / 365) as int) as usia FROM LayakMengemudi_pengemudi"
-
+        #q = "SELECT *, cast(round((julianday('now') - julianday(tanggal_lahir)) / 365) as int) as usia FROM LayakMengemudi_pengemudi"
+        today = datetime.now().date()
+        q = "SELECT *, FLOOR(DATEDIFF(CURDATE(), tanggal_lahir) / 365) as usia FROM LayakMengemudi_pengemudi"
         #raw = 'Select DATEDIFF(CURDATE(), `yourappname_patienttable`.`dob`) from `yourappname_patienttable` u where u.`id`=`yourappname_patienttable`.id'
 
         #return Pengemudi.objects.all().annotate(usia=RawSQL(raw, ()))#filter(id=1)
