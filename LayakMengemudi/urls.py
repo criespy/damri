@@ -18,6 +18,7 @@ urlpatterns = [
     path('pengemudi/print_id/<slug:slug>', PrintIDCard.as_view(), name='print-id'),
     path('report/', ReportView.as_view(), name='report'),
     path('report/pemeriksaan-harian', ReportPemeriksaanHarian.as_view(), name='report_pemeriksaan_harian'),
+    path('dashboard/', DashboardView.as_view(), name='dashboard'),
     ]
 
 if settings.DEBUG:

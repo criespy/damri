@@ -159,3 +159,6 @@ class ReportPemeriksaanHarian(LoginRequiredMixin, ListView):
         return queryset #Pemeriksaan.objects.filter(Q(tanggal__gte = daritanggal) & Q(tanggal__lte = sampaitanggal)).order_by('tanggal')
     #Pemeriksaan.objects.filter(tanggal__range = (daritanggal, sampaitanggal)).order_by('tanggal')  #Pemeriksaan.objects.filter(tanggal__date = daritanggal)#
     
+class DashboardView(LoginRequiredMixin, TemplateView):
+    login_url = 'login'
+    template_name = 'dashboard.html'
