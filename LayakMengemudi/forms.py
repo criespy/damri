@@ -69,7 +69,7 @@ class FormPemeriksaanCreate(ModelForm):
         fields = '__all__'
         widgets = {
             'pengemudi': forms.Select({'class': 'form-control form-select select2'}),
-            'tanggal': forms.TextInput({'class': 'form-control datepicker', 'autocomplete': 'off', 'value': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}),
+            'tanggal': forms.TextInput({'class': 'form-control datepicker', 'autocomplete': 'off', 'readonly':'readonly'}),#, 'value': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}),
             'sistolik': forms.NumberInput({'class': 'form-control'}),
             'diastolik': forms.NumberInput({'class': 'form-control'}),
             'suhu': forms.TextInput({'class': 'form-control', 'placeholder': '36.1'}),

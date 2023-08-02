@@ -39,7 +39,7 @@ class Pengemudi(models.Model):
 
 class Pemeriksaan(models.Model):
     pengemudi = models.ForeignKey(Pengemudi, on_delete=models.CASCADE)
-    tanggal = models.DateTimeField()
+    tanggal = models.DateTimeField(auto_now_add=True, blank=True)#.strftime("%Y-%m-%d %H:%M:%S"))
     #tensi = models.CharField(max_length=10)
     sistolik = models.IntegerField()
     diastolik = models.IntegerField()
