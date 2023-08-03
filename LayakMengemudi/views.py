@@ -13,6 +13,7 @@ from datetime import datetime, date
 #import datetime
 from django.db.models import Q
 from django.utils.timezone import timedelta
+import xlwt
 
 def index(request):
     return render(request, 'home.html')
@@ -153,7 +154,7 @@ class ReportPemeriksaanHarian(LoginRequiredMixin, ListView):
             #queryset = queryset.filter(tanggal__range=(daritanggal, sampaitanggal))
         else:
             daritanggal = datetime.now().date()
-            sampaitanggal = datetime.now().date() #+ timedelta(days=1)
+            sampaitanggal = datetime.now().date() + timedelta(days=1)
 
         queryset = queryset.filter(tanggal__range=(daritanggal, sampaitanggal)).order_by('tanggal')
         return queryset #Pemeriksaan.objects.filter(Q(tanggal__gte = daritanggal) & Q(tanggal__lte = sampaitanggal)).order_by('tanggal')

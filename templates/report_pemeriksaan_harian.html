@@ -2,33 +2,36 @@
 {% load static %}
 {% block content %}
 <div class="container-fluid">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 px-4 border-bottom">
-        <h2 class="h2">Report Pemeriksaan Harian</h2>
-    </div>
-      <div class="row row-input-tanggal pb-2 mb-3 px-4 border-bottom">
-        <form action="" method="get" class="form-inline">
-        {% csrf_token %}
-          <div class="form-group row">
-            <label for="fromDate" class="col-sm-1 col-form-label form-label">Dari:</label>
-            <div class="col-sm-4">
-              <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="fromDate" name="fromDate" placeholder="From date" aria-label="From date" value="{{ request.GET.fromDate }}"">
-            </div>
-            <label for="toDate" class="col-sm-1 col-form-label form-label">s/d</label>
-            <div class="col-sm-4">
-              <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="toDate" name="toDate" placeholder="To date" aria-label="To date" value="{{ request.GET.toDate }}"">
-            </div>
-            <div class="col-sm-2">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Pemeriksaan Harian</h3>
+        <div class="card-tools">
+          <div class="input-group input-group-sm" style="width: 650px;">
+            <form action="" method="get" class="form-control float-right">
+              {% csrf_token %}
+                <div class="form-group row">
+                  <label for="fromDate" class="col-sm-1 col-form-label form-label">Dari:</label>
+                  <div class="col-sm-4">
+                    <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="fromDate" name="fromDate" placeholder="From date" aria-label="From date" value="{{ request.GET.fromDate }}"">
+                  </div>
+                  <label for="toDate" class="col-sm-1 col-form-label form-label">s/d</label>
+                  <div class="col-sm-4">
+                    <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="toDate" name="toDate" placeholder="To date" aria-label="To date" value="{{ request.GET.toDate }}"">
+                  </div>
+                  <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+              </form>
           </div>
-        </form>
+        </div>
       </div>
-    <div class="table-responsive px-4">
-        <table class="table table-striped table-sm">
+      <div class="card-body">
+        <table class="table table-bordered table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Tanggal</th>
+              <th scope="col">Tanggal | Jam</th>
               <th scope="col">Pengemudi</th>
               <th scope="col">Pool</th>
               <th scope="col">Sistolik</th>
@@ -45,7 +48,7 @@
           {% for pemeriksaan in object_list %}
           <tr>
             <th>{{ forloop.counter }}</th>
-            <td>{{ pemeriksaan.tanggal }}</td>
+            <td>{{ pemeriksaan.tanggal|date:"d-m-Y | H:m" }}</td>
             <td>{{ pemeriksaan.pengemudi }}</td>
             <td>{{ pemeriksaan.pengemudi.pool }}</td>
             <td class="text-center">{{ pemeriksaan.sistolik }}</td>
@@ -60,6 +63,66 @@
           </tr>
           {% endfor %}
         </table>
+      </div>
     </div>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Bordered Table</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th style="width: 10px">#</th>
+              <th>Task</th>
+              <th>Progress</th>
+              <th style="width: 40px">Label</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1.</td>
+              <td>Update software</td>
+              <td>
+                <div class="progress progress-xs">
+                  <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                </div>
+              </td>
+              <td><span class="badge bg-danger">55%</span></td>
+            </tr>
+            <tr>
+              <td>2.</td>
+              <td>Clean database</td>
+              <td>
+                <div class="progress progress-xs">
+                  <div class="progress-bar bg-warning" style="width: 70%"></div>
+                </div>
+              </td>
+              <td><span class="badge bg-warning">70%</span></td>
+            </tr>
+            <tr>
+              <td>3.</td>
+              <td>Cron job running</td>
+              <td>
+                <div class="progress progress-xs progress-striped active">
+                  <div class="progress-bar bg-primary" style="width: 30%"></div>
+                </div>
+              </td>
+              <td><span class="badge bg-primary">30%</span></td>
+            </tr>
+            <tr>
+              <td>4.</td>
+              <td>Fix and squish bugs</td>
+              <td>
+                <div class="progress progress-xs progress-striped active">
+                  <div class="progress-bar bg-success" style="width: 90%"></div>
+                </div>
+              </td>
+              <td><span class="badge bg-success">90%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 </div>
 {% endblock content %}
