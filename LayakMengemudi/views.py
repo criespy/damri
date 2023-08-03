@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import DetailView, CreateView, TemplateView, ListView, UpdateView
+from django.views.generic import DetailView, CreateView, TemplateView, ListView, UpdateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Pemeriksaan, Pengemudi
 from .forms import FormPengemudiCreate, FormPemeriksaanCreate, FormSetUpdatePengemudi, FormPemeriksaanTerakhir
@@ -14,6 +14,7 @@ from datetime import datetime, date
 from django.db.models import Q
 from django.utils.timezone import timedelta
 import xlwt
+from django.http import HttpResponse
 
 def index(request):
     return render(request, 'home.html')
@@ -163,3 +164,41 @@ class ReportPemeriksaanHarian(LoginRequiredMixin, ListView):
 class DashboardView(LoginRequiredMixin, TemplateView):
     login_url = 'login'
     template_name = 'dashboard.html'
+
+class ExportToXLSView(View):
+    def get(self, request, *args, **kwargs):
+        queryset = Pemeriksaan.objects.all()
+
+        workbook = xlwt.Workbook(encoding='utf-8')
+        worksheet = workbook.add_sheet('Sheet1')
+
+        # Create a style for the header cells
+        header_style = xlwt.XFStyle()
+        header_font = xlwt.Font()
+        header_font.bold = True
+        header_style.font = header_font
+
+        headers = ['Tanggal', 'Pengemudi', 'Sistolik', 'Diastolik', 'Suhu', 'Jam Tidur', 'Gula Darah', 'Kolesterol', 'Alkohol', 'NAPZA', 'Kondisi', 'Fit/Tidak Fit']
+        DBfield = ['tanggal', 'pengemudi', 'sistolik', 'diastolik', 'suhu', 'jam_tidur', 'gula_darah', 'kolesterol', 'alkohol', 'napza', 'kondisi', 'pengemudi.status' ]
+        for col, header in enumerate(DBfield):
+            worksheet.write(0, col, header, header_style)
+
+            header_width = len(header) * 256  # Width is measured in 1/256 of the character width
+            data_width = max(len(str(item.__dict__[header])) for item in queryset) * 256
+            #column_width = max(header_width, data_width) + 100  # Add some extra padding
+
+            #worksheet.col(col).width = column_width
+
+        for row, item in enumerate(queryset, start=1):
+            data = [item.tanggal, item.pengemudi__nama, item.sistolik, item.diastolik, item.suhu, item.jam_tidur, item.gula_darah, item.kolesterol, item.alkohol, item.napza, item.kondisi, item.pengemudi.status]
+            for col, value in enumerate(data):
+                if value == 'L' :
+                    value = 'Fit Mengemudi'
+                elif value == 'TL':
+                    value = 'Tidak Fit Mengemudi'
+                worksheet.write(row, col, value)
+
+        response = HttpResponse(content_type='application/ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="export.xls"'
+        workbook.save(response)
+        return response

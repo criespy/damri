@@ -19,6 +19,7 @@ urlpatterns = [
     path('report/', ReportView.as_view(), name='report'),
     path('report/pemeriksaan-harian', ReportPemeriksaanHarian.as_view(), name='report_pemeriksaan_harian'),
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
+    path('export-xls/', ExportToXLSView.as_view(), name='export_to_xls'),
     ]
 
 if settings.DEBUG:
