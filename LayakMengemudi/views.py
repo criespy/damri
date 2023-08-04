@@ -16,6 +16,7 @@ from django.utils.timezone import timedelta
 #from django.utils import timezone
 import xlwt
 from django.http import HttpResponse
+import pytz
 
 def index(request):
     return render(request, 'home.html')
@@ -169,6 +170,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 class ExportToXLSView(View):
     def get(self, request, *args, **kwargs):
         queryset = Pemeriksaan.objects.all()
+        timezone = pytz.timezone('Asia/Jakarta')
 
         workbook = xlwt.Workbook(encoding='utf-8')
         worksheet = workbook.add_sheet('Sheet1')
@@ -185,13 +187,13 @@ class ExportToXLSView(View):
             worksheet.write(0, col, header, header_style)
 
             header_width = len(header) * 256  # Width is measured in 1/256 of the character width
-            data_width = max(len(str(item.__dict__[header])) for item in queryset) * 256
+            #data_width = max(len(str(item.__dict__[header])) for item in queryset) * 256
             #column_width = max(header_width, data_width) + 100  # Add some extra padding
 
             #worksheet.col(col).width = column_width
 
         for row, item in enumerate(queryset, start=1):
-            data = [item.tanggal, item.pengemudi__nama, item.sistolik, item.diastolik, item.suhu, item.jam_tidur, item.gula_darah, item.kolesterol, item.alkohol, item.napza, item.kondisi, item.pengemudi.status]
+            data = [item.tanggal.strftime("%Y-%m-%d %H:%M"), item.pengemudi.nama, item.sistolik, item.diastolik, item.suhu, item.jam_tidur, item.gula_darah, item.kolesterol, item.alkohol, item.napza, item.kondisi, item.pengemudi.status]
             for col, value in enumerate(data):
                 if value == 'L' :
                     value = 'Fit Mengemudi'
