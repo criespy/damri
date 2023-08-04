@@ -48,7 +48,7 @@
           {% for pemeriksaan in object_list %}
           <tr>
             <th>{{ forloop.counter }}</th>
-            <td>{{ pemeriksaan.tanggal|date:"d-m-Y | H:m" }}</td>
+            <td>{{ pemeriksaan.tanggal|date:"d-m-Y | H:i" }}</td>
             <td>{{ pemeriksaan.pengemudi }}</td>
             <td>{{ pemeriksaan.pengemudi.pool }}</td>
             <td class="text-center">{{ pemeriksaan.sistolik }}</td>

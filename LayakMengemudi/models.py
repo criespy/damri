@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from datetime import datetime
 from django_resized import ResizedImageField
+from django.utils import timezone
 
 class Pengemudi(models.Model):
     nama = models.CharField(max_length=100)
@@ -69,6 +70,11 @@ class Pemeriksaan(models.Model):
         return reverse('pengemudi-list')
 
     def save(self, *args, **kwargs):
+        #hilangkan miliseconds saat save data
+        current_datetime = timezone.now()
+        current_datetime_without_milliseconds = current_datetime.replace(microsecond=0)
+        self.tanggal = current_datetime_without_milliseconds
+
         super().save(*args, **kwargs)
         self.pengemudi.status = self.status
         self.pengemudi.periksa_terakhir = self.tanggal
