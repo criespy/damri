@@ -142,12 +142,31 @@ class ReportView(LoginRequiredMixin, TemplateView):
     model = Pemeriksaan
     template_name = 'report_generalview.html'
 
+#fungsi queryset untuk report pemeriksaan harian dan export datanya ke xls
+def filter_pemeriksaan_queryset(request):
+    queryset = Pemeriksaan.objects.all()
+    daritanggal = request.GET.get('fromDate')
+    sampaitanggal = request.GET.get('toDate')
+
+    if daritanggal and sampaitanggal:
+        daritanggal = datetime.strptime(daritanggal, '%Y-%m-%d')
+        sampaitanggal = datetime.strptime(sampaitanggal, '%Y-%m-%d').replace(hour=23, minute=59, second=59)
+    else:
+        daritanggal = datetime.now().date()
+        sampaitanggal = datetime.now().date() + timedelta(days=1)
+
+    return queryset.filter(tanggal__range=(daritanggal, sampaitanggal)).order_by('tanggal')
+
+
 class ReportPemeriksaanHarian(LoginRequiredMixin, ListView):
     login_url = 'login'
     model = Pemeriksaan
     template_name = 'report_pemeriksaan_harian.html'
 
     def get_queryset(self):
+        return filter_pemeriksaan_queryset(self.request)
+
+    '''def get_queryset(self):
         queryset = super().get_queryset()
         daritanggal = self.request.GET.get('fromDate') #datetime(2023, 6, 30, 0, 0, 0)#datetime.now().date()#datetime.date.today()
         sampaitanggal = self.request.GET.get('toDate') #datetime(2023, 6, 30, 23, 59, 59)
@@ -160,8 +179,15 @@ class ReportPemeriksaanHarian(LoginRequiredMixin, ListView):
             sampaitanggal = datetime.now().date() + timedelta(days=1)
 
         queryset = queryset.filter(tanggal__range=(daritanggal, sampaitanggal)).order_by('tanggal')
-        return queryset #Pemeriksaan.objects.filter(Q(tanggal__gte = daritanggal) & Q(tanggal__lte = sampaitanggal)).order_by('tanggal')
+        return queryset #Pemeriksaan.objects.filter(Q(tanggal__gte = daritanggal) & Q(tanggal__lte = sampaitanggal)).order_by('tanggal')'''
     #Pemeriksaan.objects.filter(tanggal__range = (daritanggal, sampaitanggal)).order_by('tanggal')  #Pemeriksaan.objects.filter(tanggal__date = daritanggal)#
+
+    #untuk kirim parameter query ke export xls
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['fromDate'] = self.request.GET.get('fromDate', '')
+        context['toDate'] = self.request.GET.get('toDate', '')
+        return context
     
 class DashboardView(LoginRequiredMixin, TemplateView):
     login_url = 'login'
@@ -169,7 +195,9 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
 class ExportToXLSView(View):
     def get(self, request, *args, **kwargs):
-        queryset = Pemeriksaan.objects.all()
+        #report_view = ReportPemeriksaanHarian()
+
+        queryset = filter_pemeriksaan_queryset(request) #report_view.get_queryset() #Pemeriksaan.objects.all()
         timezone = pytz.timezone('Asia/Jakarta')
 
         workbook = xlwt.Workbook(encoding='utf-8')

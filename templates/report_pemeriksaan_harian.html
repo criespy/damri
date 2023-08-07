@@ -6,7 +6,7 @@
       <div class="card-header">
         <h3 class="card-title">Pemeriksaan Harian</h3>
         <div class="card-tools">
-          <div class="input-group input-group-sm" style="width: 650px;">
+          <div class="input-group input-group-sm" style="width: 1280px;">
             <form action="" method="get" class="form-control float-right">
               {% csrf_token %}
                 <div class="form-group row">
@@ -21,6 +21,13 @@
                   <div class="col-sm-2">
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
+                </div>
+              </form>
+              <form class="form-control float-right" action="{% url 'export_to_xls' %}" method="get">
+                <div class="form-group ">
+                  <input type="hidden" name="fromDate" value="{{ fromDate }}">
+                  <input type="hidden" name="toDate" value="{{ toDate }}">
+                  <button type="submit" class="btn btn-primary">Export to Excel</button>
                 </div>
               </form>
           </div>
