@@ -14,7 +14,7 @@ from datetime import datetime, date
 from django.db.models import Q
 from django.utils.timezone import timedelta
 #from django.utils import timezone
-import xlwt
+import xlwt, xlrd
 from django.http import HttpResponse
 import pytz
 
@@ -203,6 +203,10 @@ class ExportToXLSView(View):
         workbook = xlwt.Workbook(encoding='utf-8')
         worksheet = workbook.add_sheet('Sheet1')
 
+        # Convert to naive datetime, fix error saat export
+        daritanggal = datetime.strptime(request.GET.get('fromDate'), '%Y-%m-%d')
+        sampaitanggal = datetime.strptime(request.GET.get('toDate'), '%Y-%m-%d').replace(hour=23, minute=59, second=59)
+
         # Create a style for the header cells
         header_style = xlwt.XFStyle()
         header_font = xlwt.Font()
@@ -221,7 +225,16 @@ class ExportToXLSView(View):
             #worksheet.col(col).width = column_width
 
         for row, item in enumerate(queryset, start=1):
-            data = [item.tanggal.strftime("%Y-%m-%d %H:%M"), item.pengemudi.nama, item.sistolik, item.diastolik, item.suhu, item.jam_tidur, item.gula_darah, item.kolesterol, item.alkohol, item.napza, item.kondisi, item.pengemudi.status]
+            item_tanggal_naive = item.tanggal.astimezone(timezone).replace(tzinfo=None)
+
+            #base_date = datetime(1899, 12, 30)  # Excel base date is December 30, 1899
+            #excel_date_delta = timedelta(days=item_tanggal_naive)
+            #result_datetime = base_date + excel_date_delta
+
+            result_datetime = xlrd.xldate_as_datetime(item_tanggal_naive, 0)  # 0 means the datemode is 1900-based
+            item_tanggal_naive = result_datetime.strftime('%Y-%m-%d %H:%M:%S')
+
+            data = [item_tanggal_naive, item.pengemudi.nama, item.sistolik, item.diastolik, item.suhu, item.jam_tidur, item.gula_darah, item.kolesterol, item.alkohol, item.napza, item.kondisi, item.pengemudi.status]
             for col, value in enumerate(data):
                 if value == 'L' :
                     value = 'Fit Mengemudi'
