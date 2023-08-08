@@ -204,8 +204,8 @@ class ExportToXLSView(View):
         worksheet = workbook.add_sheet('Sheet1')
 
         # Convert to naive datetime, fix error saat export
-        daritanggal = datetime.strptime(request.GET.get('fromDate'), '%Y-%m-%d')
-        sampaitanggal = datetime.strptime(request.GET.get('toDate'), '%Y-%m-%d').replace(hour=23, minute=59, second=59)
+        #daritanggal = datetime.strptime(request.GET.get('fromDate'), '%Y-%m-%d')
+        #sampaitanggal = datetime.strptime(request.GET.get('toDate'), '%Y-%m-%d').replace(hour=23, minute=59, second=59)
 
         # Create a style for the header cells
         header_style = xlwt.XFStyle()
@@ -219,10 +219,15 @@ class ExportToXLSView(View):
             worksheet.write(0, col, header, header_style)
 
             header_width = len(header) * 256  # Width is measured in 1/256 of the character width
-            #data_width = max(len(str(item.__dict__[header])) for item in queryset) * 256
-            #column_width = max(header_width, data_width) + 100  # Add some extra padding
+            data_width = max(len(str(getattr(item, header, ''))) for item in queryset) * 256
+            '''data_width = max(
+                            len(str(getattr(item, header))) if header != 'pengemudi' else len(str(getattr(item.pengemudi, 'pool')))
+                            for item in queryset
+                        ) * 256'''
+            #data_width = 200
+            column_width = max(header_width, data_width) + 1000  # Add some extra padding
 
-            #worksheet.col(col).width = column_width
+            worksheet.col(col).width = column_width
 
         for row, item in enumerate(queryset, start=1):
             item_tanggal_naive = item.tanggal.astimezone(timezone).replace(tzinfo=None)
