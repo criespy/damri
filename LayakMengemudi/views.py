@@ -231,10 +231,10 @@ class ExportToXLSView(View):
             #excel_date_delta = timedelta(days=item_tanggal_naive)
             #result_datetime = base_date + excel_date_delta
 
-            result_datetime = xlrd.xldate_as_datetime(item_tanggal_naive, 0)  # 0 means the datemode is 1900-based
-            item_tanggal_naive = result_datetime.strftime('%Y-%m-%d %H:%M:%S')
+            #result_datetime = xlrd.xldate_as_datetime(item_tanggal_naive, 0)  # 0 means the datemode is 1900-based
+            #item_tanggal_naive = result_datetime.strftime('%Y-%m-%d %H:%M:%S')
 
-            data = [item_tanggal_naive, item.pengemudi.nama, item.sistolik, item.diastolik, item.suhu, item.jam_tidur, item.gula_darah, item.kolesterol, item.alkohol, item.napza, item.kondisi, item.pengemudi.status]
+            data = [item_tanggal_naive.strftime('%Y-%m-%d %H:%M'), item.pengemudi.nama, item.sistolik, item.diastolik, item.suhu, item.jam_tidur, item.gula_darah, item.kolesterol, item.alkohol, item.napza, item.kondisi, item.pengemudi.status]
             for col, value in enumerate(data):
                 if value == 'L' :
                     value = 'Fit Mengemudi'
