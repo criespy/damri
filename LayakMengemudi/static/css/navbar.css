@@ -13,3 +13,7 @@ th input {
 .row-input-tanggal {
   width: 600px;
 }
+
+.navbar-light {
+  background:linear-gradient(to bottom, #00ff37, #66ff87, #c1ffcf);
+}
