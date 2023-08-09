@@ -248,6 +248,8 @@ class ExportToXLSView(View):
                 worksheet.write(row, col, value)
 
         response = HttpResponse(content_type='application/ms-excel')
-        response['Content-Disposition'] = 'attachment; filename="export.xls"'
+        today_date = date.today().strftime('%Y-%m-%d')
+        filename = f"pemeriksaan_harian_{today_date}.xls"
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
         workbook.save(response)
         return response
