@@ -19,4 +19,62 @@ th input {
   /*background:linear-gradient(to bottom, #a6ffa1, #b7ffb6, #e9ffe7);*/
   background:linear-gradient(to bottom, #a6ffa1, #b7ffb6);
 }
+
+.dropdown-menu {
+  opacity: 0; /* Start with opacity 0 */
+  transform: translateY(-10px); /* Move up slightly */
+  transition: opacity 1s ease, transform 1s ease; /* Customize transitions */
+}
+
+.dropdown-menu.show {
+  opacity: 1; /* Fade in when shown */
+  transform: translateY(0); /* Return to original position */
+}
+
+@media (min-width: 768px) {
+  .animate {
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0rem);
+    opacity: 1;
+  }
+
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    -webkit-transform: transform;
+    -webkit-opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+
+  0% {
+    -webkit-transform: translateY(1rem);
+    -webkit-opacity: 0;
+  }
+}
+
+.slideIn {
+  -webkit-animation-name: slideIn;
+  animation-name: slideIn;
 }
