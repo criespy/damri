@@ -15,5 +15,8 @@ th input {
 }
 
 .navbar-light {
-  background:linear-gradient(to bottom, #00ff37, #66ff87, #c1ffcf);
+  /*background:linear-gradient(to bottom, #00c82b, #2cff5a, #66ff87, #c1ffcf, #fff);*/
+  /*background:linear-gradient(to bottom, #a6ffa1, #b7ffb6, #e9ffe7);*/
+  background:linear-gradient(to bottom, #a6ffa1, #b7ffb6);
+}
 }
