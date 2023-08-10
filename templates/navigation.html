@@ -66,7 +66,7 @@
                 {% if user.is_superuser %}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Laporan</a>
-                  <ul class="dropdown-menu" aria-labelledby="dropdown04">
+                  <ul class="dropdown-menu animate slideDown" aria-labelledby="dropdown04">
                     <li><a class="dropdown-item" href="{% url 'report' %}">Rekap Pemeriksaan</a></li>
                     <li><a class="dropdown-item" href="{% url 'report_pemeriksaan_harian' %}">Report Pemeriksaan Harian</a></li>
                     <li><a class="dropdown-item" href="#">Daftar Pengemudi Tidak Layak Jalan</a></li>
@@ -98,7 +98,8 @@
             // Retrieve active link's index from local storage and set active class
             const activeLinkIndex = localStorage.getItem("activeLinkIndex");
             if (activeLinkIndex !== null) {
-              navLinks[activeLinkIndex].classList.add("active");
+              navLinks[activeLinkIndex].classList.add("active"); //untuk di nav-link nya
+              navLinks[activeLinkIndex].parentElement.classList.add("active"); //untuk di nav-item
               console.log("ditambahkan aktif")
             }
             

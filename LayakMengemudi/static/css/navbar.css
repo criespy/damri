@@ -20,16 +20,6 @@ th input {
   background:linear-gradient(to bottom, #a6ffa1, #b7ffb6);
 }
 
-.dropdown-menu {
-  opacity: 0; /* Start with opacity 0 */
-  transform: translateY(-10px); /* Move up slightly */
-  transition: opacity 1s ease, transform 1s ease; /* Customize transitions */
-}
-
-.dropdown-menu.show {
-  opacity: 1; /* Fade in when shown */
-  transform: translateY(0); /* Return to original position */
-}
 
 @media (min-width: 768px) {
   .animate {
@@ -47,19 +37,14 @@ th input {
   }
 
   100% {
-    transform: translateY(0rem);
+    transform: translateY(0);
     opacity: 1;
-  }
-
-  0% {
-    transform: translateY(1rem);
-    opacity: 0;
   }
 }
 
 @-webkit-keyframes slideIn {
   0% {
-    -webkit-transform: transform;
+    -webkit-transform: translateY(1rem);
     -webkit-opacity: 0;
   }
 
@@ -67,14 +52,64 @@ th input {
     -webkit-transform: translateY(0);
     -webkit-opacity: 1;
   }
-
-  0% {
-    -webkit-transform: translateY(1rem);
-    -webkit-opacity: 0;
-  }
 }
 
 .slideIn {
   -webkit-animation-name: slideIn;
   animation-name: slideIn;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-0.5rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes slideDown {
+  0% {
+    -webkit-transform: translateY(-0.5rem);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slideDown {
+  -webkit-animation-name: slideDown;
+  animation-name: slideDown;
+}
+
+/* Custom CSS for submenus */
+.dropdown-submenu .dropdown-menu {
+  position: absolute;
+  top: 0; /* Adjust this value as needed */
+  left: 100%; /* This value ensures the submenu is placed to the right of the parent */
+  transform: translateX(0); /* Reset any translation */
+}
+
+/* Adjust submenu's first-level margin to align with menu text */
+.dropdown-submenu > .nav-link {
+  margin-bottom: 0; /* Reset margin to align properly */
+}
+
+a.active {
+  font-weight: bolder;
+}
+
+li.active {
+  background-color: rgb(124, 227, 141);
+  border-radius: 20px;
+}
+
+.nav-link {
+  font-weight: bold;
 }
