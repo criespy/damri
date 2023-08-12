@@ -107,7 +107,7 @@ a.active {
 
 li.active {
   background-color: rgb(124, 227, 141);
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 .nav-link {

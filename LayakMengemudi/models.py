@@ -59,8 +59,8 @@ class Pemeriksaan(models.Model):
     napza = models.CharField(max_length=1, choices=StatusNapza.choices, default=StatusNapza.NEGATIF)
     kondisi = models.CharField(max_length=200)
     class StatusJalan(models.TextChoices):
-        LAYAK = 'L', _('Layak Jalan')
-        TIDAK = 'TL', _('Tidak Layak Jalan')
+        LAYAK = 'L', _('Fit Mengemudi')
+        TIDAK = 'TL', _('Tidak Fit')
     status = models.CharField(max_length=2, choices=StatusJalan.choices, default=StatusJalan.TIDAK)
 
     def __str__(self):

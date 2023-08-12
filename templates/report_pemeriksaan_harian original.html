@@ -1,0 +1,136 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Pemeriksaan Harian</h3>
+        <div class="card-tools">
+          <div class="input-group input-group-sm" style="width: 1280px;">
+            <form action="" method="get" class="form-control float-right">
+              {% csrf_token %}
+                <div class="form-group row">
+                  <label for="fromDate" class="col-sm-1 col-form-label form-label">Dari:</label>
+                  <div class="col-sm-4">
+                    <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="fromDate" name="fromDate" placeholder="dd-mm-yyyy" aria-label="From date" value="{{ request.GET.fromDate }}">
+                  </div>
+                  <label for="toDate" class="col-sm-1 col-form-label form-label">s/d</label>
+                  <div class="col-sm-4">
+                    <input type="date" pattern="\d{4}-\d{2}-\d{2}" class="form-control" id="toDate" name="toDate" placeholder="To date" aria-label="To date" value="{{ request.GET.toDate }}">
+                  </div>
+                  <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+              </form>
+              <form class="form-control float-right" action="{% url 'export_to_xls' %}" method="get">
+                <div class="form-group ">
+                  <input type="hidden" name="fromDate" value="{{ fromDate }}">
+                  <input type="hidden" name="toDate" value="{{ toDate }}">
+                  <button type="submit" class="btn btn-success"><i class="fa-regular fa-file-excel"></i> Export to Excel</button>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h6 class="card-title">Total Record: {{ object_list|length }}</h6>
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Tanggal | Jam</th>
+              <th scope="col">Pengemudi</th>
+              <th scope="col">Pool</th>
+              <th scope="col">Sistolik</th>
+              <th scope="col">Diastolik</th>
+              <th scope="col">Suhu</th>
+              <th scope="col">Jam Tidur</th>
+              <th scope="col">Gula Darah</th>
+              <th scope="col">Kolesterol</th>
+              <th scope="col">Alkohol</th>
+              <th scope="col">Kondisi</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          {% for pemeriksaan in object_list %}
+          <tr>
+            <th>{{ forloop.counter }}</th>
+            <td>{{ pemeriksaan.tanggal|date:"d-m-Y | H:i" }}</td>
+            <td>{{ pemeriksaan.pengemudi }}</td>
+            <td>{{ pemeriksaan.pengemudi.pool }}</td>
+            <td class="text-center">{{ pemeriksaan.sistolik }}</td>
+            <td class="text-center">{{ pemeriksaan.diastolik }}</td>
+            <td class="text-center">{{ pemeriksaan.suhu }}</td>
+            <td class="text-center">{{ pemeriksaan.jam_tidur }}</td>
+            <td class="text-center">{{ pemeriksaan.gula_darah }}</td>
+            <td class="text-center">{{ pemeriksaan.kolesterol }}</td>
+            <td class="text-center">{{ pemeriksaan.alkohol }}</td>
+            <td>{{ pemeriksaan.kondisi }}</td>
+            <td>{{ pemeriksaan.get_status_display }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Bordered Table</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th style="width: 10px">#</th>
+              <th>Task</th>
+              <th>Progress</th>
+              <th style="width: 40px">Label</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1.</td>
+              <td>Update software</td>
+              <td>
+                <div class="progress progress-xs">
+                  <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                </div>
+              </td>
+              <td><span class="badge bg-danger">55%</span></td>
+            </tr>
+            <tr>
+              <td>2.</td>
+              <td>Clean database</td>
+              <td>
+                <div class="progress progress-xs">
+                  <div class="progress-bar bg-warning" style="width: 70%"></div>
+                </div>
+              </td>
+              <td><span class="badge bg-warning">70%</span></td>
+            </tr>
+            <tr>
+              <td>3.</td>
+              <td>Cron job running</td>
+              <td>
+                <div class="progress progress-xs progress-striped active">
+                  <div class="progress-bar bg-primary" style="width: 30%"></div>
+                </div>
+              </td>
+              <td><span class="badge bg-primary">30%</span></td>
+            </tr>
+            <tr>
+              <td>4.</td>
+              <td>Fix and squish bugs</td>
+              <td>
+                <div class="progress progress-xs progress-striped active">
+                  <div class="progress-bar bg-success" style="width: 90%"></div>
+                </div>
+              </td>
+              <td><span class="badge bg-success">90%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+</div>
+{% endblock content %}
