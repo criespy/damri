@@ -193,6 +193,16 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     login_url = 'login'
     template_name = 'dashboard.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        today = datetime.now().date()
+        delta = datetime.now().date() + timedelta(days=1)
+        querysetPemeriksaan = Pemeriksaan.objects.filter(tanggal__range=(today, delta))
+        
+        context['data_pemeriksaan'] = querysetPemeriksaan
+        return context
+
+
 class ExportToXLSView(View):
     def get(self, request, *args, **kwargs):
         #report_view = ReportPemeriksaanHarian()
