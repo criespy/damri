@@ -13,7 +13,7 @@ from datetime import datetime, date
 #import datetime
 from django.db.models import Q
 from django.utils.timezone import timedelta
-#from django.utils import timezone
+from django.utils import timezone
 import xlwt, xlrd
 from django.http import HttpResponse
 import pytz
@@ -196,10 +196,23 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         today = datetime.now().date()
+        utc_today = datetime.utcnow()
         delta = datetime.now().date() + timedelta(days=1)
-        querysetPemeriksaan = Pemeriksaan.objects.filter(tanggal__range=(today, delta))
+
+        date_filter = Q(tanggal__range=(today, delta))
+        layak_filter = Q(status='L')
+        belumperiksa_filter = Q(periksa_terakhir__lt=today)     
+        date_layak_filter = date_filter & layak_filter
+        belum_ada_data_filter = Q(periksa_terakhir__isnull=True)
+
+        querysetPemeriksaan = Pemeriksaan.objects.filter(date_filter)
+        querysetPemeriksaanLayak = Pemeriksaan.objects.filter(date_layak_filter)
+        querysetPengemudiBelumPeriksa = Pengemudi.objects.filter(belumperiksa_filter|belum_ada_data_filter)
         
         context['data_pemeriksaan'] = querysetPemeriksaan
+        context['persentase_layak'] = int(len(querysetPemeriksaanLayak) / len(querysetPemeriksaan) * 100)
+        context['belum_diperiksa'] = len(querysetPengemudiBelumPeriksa)
+        context['debug'] = today
         return context
 
 

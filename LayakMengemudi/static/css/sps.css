@@ -10,3 +10,12 @@
 .card-header {
     padding-top: 1rem;;
 }
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #28a745
+}
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 8px 10px; /* e.g. change 8x to 4px here */
+}
+table.dataTable tbody tr {
+    height: 100px;
+}
