@@ -26,3 +26,6 @@ table.dataTable tfoot tr th input {
     border: 1px solid #ced4da;
     font-size: .875rem;
 }
+.dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate {
+    padding: 1rem 1rem;
+}
