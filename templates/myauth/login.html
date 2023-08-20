@@ -40,7 +40,13 @@
     <main class="form-signin">
       <form method="post" action="{% url 'login' %}" novalidate>
         {% csrf_token %}
-        <img class="mb-4" src="{% static 'logo-sps-damri-small.jpg' %}" alt="">
+        <div class="row">
+          <div class="col">
+            <img class="mb-4" src="{% static 'klinikSPS_logo.png' %}" style="height: 4rem;" alt="Klinik SPS">
+            <h1>DHC</h1>
+          </div>
+
+        </div>
         <h1 class="h3 mb-3 fw-normal">Klinik Sinar Purnama Sehat - DAMRI</h1>
 
         <div class="form-floating">
