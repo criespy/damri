@@ -36,7 +36,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{% static 'klinikSPS_logo.png' %}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="{% static 'klinikSPS_logo.png' %}" alt="Klinik SPS" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -208,8 +208,14 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="{% url 'pemeriksaan-create'%}" class="nav-link">
+                  <i class="fa-solid fa-stethoscope nav-icon"></i>
+                  <p>Input Pemeriksaan</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{% url 'report_pemeriksaan_harian'%}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-file nav-icon"></i>
                   <p>Report Harian</p>
                 </a>
               </li>

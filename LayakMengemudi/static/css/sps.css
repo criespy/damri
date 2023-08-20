@@ -20,5 +20,9 @@ table.dataTable tbody tr {
     height: 100px;
 }
 table.dataTable tfoot tr th input {
-    width: 70px;
+    width: 100%;
+    border-radius: 0.2rem;
+    padding: .25rem .5rem;
+    border: 1px solid #ced4da;
+    font-size: .875rem;
 }
