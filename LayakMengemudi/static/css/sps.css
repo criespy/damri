@@ -19,3 +19,6 @@ table.dataTable tbody th, table.dataTable tbody td {
 table.dataTable tbody tr {
     height: 100px;
 }
+table.dataTable tfoot tr th input {
+    width: 70px;
+}
