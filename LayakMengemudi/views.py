@@ -210,7 +210,10 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         querysetPengemudiBelumPeriksa = Pengemudi.objects.filter(belumperiksa_filter|belum_ada_data_filter)
         
         context['data_pemeriksaan'] = querysetPemeriksaan
-        context['persentase_layak'] = int(len(querysetPemeriksaanLayak) / len(querysetPemeriksaan) * 100)
+        if len(querysetPemeriksaanLayak) != 0:
+            context['persentase_layak'] = int(len(querysetPemeriksaanLayak) / len(querysetPemeriksaan) * 100)
+        else:
+            context['persentase_layak'] = 0
         context['belum_diperiksa'] = len(querysetPengemudiBelumPeriksa)
         context['debug'] = today
         return context
