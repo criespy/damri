@@ -1,0 +1,58 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>Pemeriksaan Kesehatan</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table class="table table-borderless">
+            {{ form }}
+            <tr class="text-center">
+                <td colspan="2">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a href="{% url 'pengemudi-list' %}"  class="btn btn-danger">Cancel</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<!-- Select2 cdn -->
+<link href="{% static 'css/select2.min.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/select2-bootstrap-5-theme.min.css' %}" rel="stylesheet"/>
+<script src="{% static 'js/select2.min.js' %}"></script>
+<!--script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script-->
+
+<script>
+    var tanggal = document.getElementById('id_pemeriksaan_set-0-tanggal').value;
+    document.getElementById('id_periksa_terakhir').value = tanggal;
+</script>
+<script>
+      $( function() {
+        $( "#id_tanggal" ).datepicker({
+        dateFormat: 'yy-mm-dd',
+        });
+      } );
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.select2')
+        //.wrap("<div class=\"position-relative\"></div>")
+        .select2({
+        theme: "bootstrap-5",
+        allowClear: false,
+        placeholder: 'Cari Pengemudi',
+        });
+    });
+</script>
+<!--Fix select2 dengan jquery 3.6-->
+<script>
+        $(document).on('select2:open', () => {
+        document.querySelector('.select2-search__field').focus();
+        });
+</script>
+{% endblock content%}
