@@ -67,7 +67,7 @@ class Pemeriksaan(models.Model):
         return str(self.tanggal) + " - " + self.pengemudi.nama
 
     def get_absolute_url(self):
-        return reverse('pemeriksaan-create-success')
+        return reverse('pemeriksaan-create')
 
     def save(self, *args, **kwargs):
         #hilangkan miliseconds saat save data

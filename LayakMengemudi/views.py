@@ -107,13 +107,15 @@ class PemeriksaanCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        self.object_saved = True
+        #self.object_saved = True
         #messages.success(self.request, 'Data berhasil disimpan.')
+        self.request.session['object_saved'] = True #buat bikin status data berhasil disimpan
         return response
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['object_saved'] = getattr(self, 'object_saved', False)
+        object_saved = self.request.session.get('object_saved', False) #panggil status data berhasil disimpan
+        context['object_saved'] = object_saved #getattr(self, 'object_saved', False)
         return context
 
 class PemeriksaanUpdate(LoginRequiredMixin, UpdateView):
