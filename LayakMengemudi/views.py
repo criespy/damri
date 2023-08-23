@@ -17,6 +17,7 @@ from django.utils import timezone
 import xlwt, xlrd
 from django.http import HttpResponse
 import pytz
+from django.contrib import messages
 
 def index(request):
     return render(request, 'home.html')
@@ -103,6 +104,17 @@ class PemeriksaanCreate(LoginRequiredMixin, CreateView):
     model = Pemeriksaan
     template_name = 'pemeriksaan_createview2.html'
     form_class = FormPemeriksaanCreate
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.object_saved = True
+        #messages.success(self.request, 'Data berhasil disimpan.')
+        return response
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object_saved'] = getattr(self, 'object_saved', False)
+        return context
 
 class PemeriksaanUpdate(LoginRequiredMixin, UpdateView):
     login_url = 'login'

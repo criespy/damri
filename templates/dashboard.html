@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}">
   <!-- summernote -->
   <link rel="stylesheet" href="{% static 'plugins/summernote/summernote-bs4.min.css' %}">
+  <!-- sweetAlert -->
+  <link rel="stylesheet" href="{% static 'plugins/sweetalert2/sweetalert2.min.css' %}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
 <div class="wrapper">
@@ -584,6 +586,8 @@
 <script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
 <script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
 <script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+<!--SweetAlert-->
+<script src="{% static 'plugins/sweetalert2/sweetalert2.min.js' %}"></script>
 <!-- Select2 cdn -->
 <link href="{% static 'css/select2.min.css' %}" rel="stylesheet"/>
 <link href="{% static 'css/select2-bootstrap-5-theme.min.css' %}" rel="stylesheet"/>
@@ -649,6 +653,14 @@
 </script>
 <!--sweetalert-->
 <script>
+  function showAlert() {
+    Toast.fire({
+      icon: 'success',
+      title: 'Data berhasil disimpan.'
+    });
+  }
+</script>
+<script>
   $(function() {
     var Toast = Swal.mixin({
       toast: true,
@@ -656,11 +668,16 @@
       showConfirmButton: false,
       timer: 3000
     });
-
+    $('.swal').click(function() {
+    Toast.fire({
+      icon: 'success',
+      title: 'Data berhasil disimpan.'
+      });
+    });
     $('.swalDefaultSuccess').click(function() {
       Toast.fire({
         icon: 'success',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        title: 'Data berhasil disimpan.'
       })
     });
     $('.swalDefaultInfo').click(function() {
@@ -687,6 +704,7 @@
         title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
       })
     });
+  })
 </script>
 </body>
 </html>
