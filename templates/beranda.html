@@ -1,14 +1,13 @@
-{% extends 'navigation.html' %}
+{% extends 'dashboard.html' %}
 {% load static %}
 {% block content %}
   <div class="container">
-    <div>
-      <div class="bg-light p-5 rounded">
-        <div class="col-sm-8 mx-auto">
-          <h1>Sistem Pemeriksaan Kesehatan</h1>
-          <div>Scan QR Kartu Pengemudi</div>
-          <div style="width: 220px" id="reader2">tes</div>
-        </div>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Scan QR Kartu Pengemudi</h1>
+      </div>
+      <div class="card-body text-center">
+        <div id="reader2">tes</div>
       </div>
     </div>
   </div>

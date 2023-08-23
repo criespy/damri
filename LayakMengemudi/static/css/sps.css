@@ -29,3 +29,32 @@ table.dataTable tfoot tr th input {
 .dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate {
     padding: 1rem 1rem;
 }
+#reader2 {
+    border: 0px !important;
+}
+button.html5-qrcode-element {
+    border-radius: 0.25rem;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    font-weight: 400;
+    border: 1px solid;
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-top: 2rem;
+
+}
+a.html5-qrcode-element {
+    text-decoration: none !important;
+    border-radius: 0.25rem;
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    font-weight: 400;
+    border: 1px solid;
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-top: 2rem;
+}
