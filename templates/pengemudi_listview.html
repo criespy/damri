@@ -1,4 +1,4 @@
-{% extends 'dashboard.html' %}
+{% extends 'base2.html' %}
 {% load static %}
 {% block content %}
 <section class="content-header">
@@ -23,6 +23,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">List Pengemudi</h3>
+                        <div class="card-tools">
+                            <a href="{% url 'pengemudi-create' %}" type="button" class="btn btn-success">+Tambah Pengemudi</a>
+                        </div>
                     </div>
                     <div class="card-body table-responsive p-0">
                         <div class="dataTables_wrapper dt-bootstrap4">                     
@@ -80,17 +83,7 @@
         </div>
     </div>
 </section>
-<div class="container">
-    <div class="row mb-3">
-        <div class="col md-8">
-            <h1>Daftar Pengemudi</h1>
-        </div>
-        <div class="col md-4 text-end">
-            <a href="{% url 'pengemudi-create' %}" type="button" class="btn btn-primary">+Tambah Pengemudi</a>
-        </div>
-    </div>
 
-</div>
 <!--script src="{% static 'js/jquery-3.6.1.min.js' %}"></script-->
 <!--script src="{% static 'js/jquery-ui.js' %}"></script-->
 <!--script src="{% static 'js/jquery.dataTables.min.js' %}"></script-->
