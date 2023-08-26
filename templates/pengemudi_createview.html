@@ -1,29 +1,37 @@
-{% extends 'navigation.html' %}
+{% extends 'base2.html' %}
 {% load static %}
 {% block content %}
  <div class="container">
-    <h1>Input Data Pengemudi</h1>
-    <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-        <table class="table table-borderless">
-            <thead>
-                <tr>
-                    <td colspan="2"></td>
-                </tr>
-            </thead>
-            <tbody>
-                {{ form.as_table }}
-            </tbody>
-            <tr>
-                <td>
-                </td>
-                <td>
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <a href="{% url 'pengemudi-list' %}"  class="btn btn-danger">Cancel</a>
-                </td>
-            </tr>
-        </table>
-    </form>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Input Data Pengemudi</h3>
+        </div>
+        <div class="card-body">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <td colspan="2"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{ form.as_table }}
+                        </tbody>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <a href="{% url 'pengemudi-list' %}"  class="btn btn-danger">Cancel</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+        </div>
+    </div>
+    
+    
  </div>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
