@@ -15,6 +15,7 @@
             max-width: 600px;
             margin: 100px auto;
             text-align: center;
+            padding: 0 20px; /* Added padding to make it responsive */
         }
         
         h1 {
@@ -38,19 +39,24 @@
             border-radius: 4px;
             font-size: 18px;
         }
+
+        /* Media Query for Responsive Design */
+        @media screen and (max-width: 600px) {
+            .container-503 {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class = "container-503">
+    <div class="container-503">
         <h1>503 Service Unavailable</h1>
         <p>
             Oops! <s>We are currently working on some updates.</s> <b>Services are suspended due to pending payments.</b> 
             We apologize for the inconvenience and appreciate your patience.
         </p>
         <p>Please come back later</p>
-        <a href = "" class = "btn-503">
-            Contact support
-        </a>
+        <a href="" class="btn-503">Contact support</a>
         <p>
             Developed by @riespratama for Klinik SPS
         </p>
