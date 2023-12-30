@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'myauth',
     'widget_tweaks',
     'sslserver',
+    'maintenance_mode',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'maintenance_mode.middleware.MaintenanceModeMiddleware',
 ]
 
 ROOT_URLCONF = 'damriProject.urls'
@@ -81,8 +83,13 @@ WSGI_APPLICATION = 'damriProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'damri',
+        'USER': 'root',
+        'PASSWORD': 'silokadina',
+    	'HOST': 'localhost',
     }
 }
 
@@ -134,3 +141,10 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DATE_INPUT_FORMATS = ['%d-%m-%Y']
+
+# if True the maintenance-mode will be activated
+MAINTENANCE_MODE = None
+MAINTENANCE_MODE_TEMPLATE = "503.html"
+#MAINTENANCE_MODE_STATE_BACKEND = "maintenance_mode.backends.LocalFileBackend"
+MAINTENANCE_MODE_STATE_BACKEND = "maintenance_mode.backends.StaticStorageBackend"
+MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
